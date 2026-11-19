@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sharf | 3D Load Planner V4.1</title>
+<title>SHARF LOAD PLANNER V5.0 PRO | Interfaz profesional</title>
 <style>
 :root{--red:#ff6568;--wine:#68002b;--pink:#ffc1c2;--black:#000;--gray:#808080;--pale:#f5f5f3;--line:#dedede;--green:#00ccaa}
 *{box-sizing:border-box} body{margin:0;background:#f5f5f3;color:#111;font-family:"Arial Narrow","Roboto Condensed",Arial,sans-serif}
@@ -53,17 +53,194 @@ table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:7px;borde
 #threeError{display:none;position:absolute;inset:0;align-items:center;justify-content:center;padding:30px;text-align:center;background:#fff;z-index:8}
 @media(max-width:850px){.techgrid{grid-template-columns:repeat(2,1fr)}#threeWrap{height:480px}}
 
+
+.fleet-panel{border:2px solid #183d58;border-radius:14px;padding:15px;margin:14px 0;background:#f5f9fc}
+.fleet-panel h2{margin:0 0 9px;font-size:18px;color:#183d58}
+.fleet-fields{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin-bottom:10px}
+.fleet-fields label{display:block;font-size:11px;font-weight:bold;margin-bottom:3px}
+.fleet-fields input,.fleet-fields select{width:100%;min-width:0}
+.fleet-btn{background:#183d58;color:white;border:0;border-radius:8px;padding:11px;cursor:pointer;font-weight:bold}
+.fleet-results{margin-top:12px}.fleet-option{border:1px solid #ccd6dd;border-radius:10px;padding:12px;margin:9px 0;background:#fff}
+.fleet-option.best{border:2px solid #177e89}.fleet-option h3{margin:0 0 6px;font-size:14px}
+.fleet-chip{display:inline-block;border-radius:12px;background:#e7eef2;color:#17384b;padding:3px 8px;margin:3px;font-size:11px}
+.fleet-warn{background:#fff4df;border-left:4px solid #df9419;padding:9px;border-radius:6px;margin:7px 0;font-size:12px}
+.fleet-bad{background:#fff0f0;border-left:4px solid #c33;padding:9px;border-radius:6px;margin:7px 0;font-size:12px}
+.fleet-unit{background:#f1f6f9;padding:8px;border-radius:7px;margin:6px 0;font-size:12px}
+.fleet-muted{color:#546674;font-size:11px}.fleet-option button{margin-top:5px;padding:7px 10px}
+@media(max-width:700px){.fleet-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* V5.0 PRO - capa de interfaz no destructiva */
+:root{--red:#f35d62;--ink:#16283b;--muted:#657588;--line:#e1e8ed}
+body{background:#edf2f6;color:var(--ink);font-family:Inter,"Segoe UI",Arial,sans-serif}
+header{height:68px;background:#102a40} main{grid-template-columns:minmax(310px,340px) minmax(0,1fr);gap:14px;max-width:1800px;margin:auto;padding:14px}
+.card{border-color:#e2e8ee;box-shadow:0 2px 12px #18354b0b;border-radius:12px}
+.card.left{align-self:start;position:sticky;top:12px;max-height:calc(100vh - 26px);overflow:auto;scrollbar-width:thin}
+.card.left input,.card.left select{padding:8px;font-size:13px}
+.card.left h2{margin:8px 0 12px}
+.stats{grid-template-columns:repeat(5,minmax(0,1fr))}.stat{background:#183d58}.stat.red{background:#ffe7e8;color:#ae2632}
+#threeWrap{height:min(64vh,660px);min-height:420px;background:#f8fafc}
+.viewbar{right:10px;max-width:calc(100% - 20px)}.viewbar button{font-size:12px;padding:6px 9px}
+.fleet-panel{background:#fff;border:1px solid var(--line);padding:14px}
+.fleet-panel h2{color:var(--ink)}
+.pro-details{border:1px solid var(--line);border-radius:10px;margin:10px 0;background:#fff;overflow:hidden}
+.pro-details>summary{cursor:pointer;padding:12px 13px;font-size:13px;font-weight:750;list-style:none;display:flex;justify-content:space-between;align-items:center}
+.pro-details>summary::-webkit-details-marker{display:none}.pro-details>summary::after{content:'⌄';font-size:18px;color:#62758a}
+.pro-details[open]>summary{border-bottom:1px solid var(--line);background:#f7fafc}.pro-details[open]>summary::after{content:'⌃'}
+.pro-details>.pro-inner{padding:12px}
+.pro-actions{display:flex;gap:7px;flex-wrap:wrap;margin:10px 0}.pro-actions button{width:auto;padding:8px 12px}
+.pro-topline{display:flex;justify-content:space-between;gap:10px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+.pro-topline h1{font-size:19px;margin:0}.pro-topline small{font-size:11px;color:var(--muted)}
+.pro-pill{background:#e9f1f7;color:#20465d;border-radius:100px;padding:6px 10px;font-size:11px;font-weight:700}
+.pro-quicknav{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}.pro-quicknav button{width:auto;font-size:12px;padding:7px 10px;background:#fff}
+.pro-sidehelp{font-size:11px;color:var(--muted);line-height:1.5}
+.pro-hidden-label{display:none}
+.techgrid{margin:0}.oogpanel{margin:0}.fleet-fields{grid-template-columns:repeat(3,minmax(0,1fr))}
+.fleet-panel>.fleet-fields{margin-top:8px}.fleet-panel>button{max-width:100%;margin:4px 0!important}
+@media(max-width:1050px){main{grid-template-columns:1fr}.card.left{position:static;max-height:none}.fleet-fields{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.stats{grid-template-columns:repeat(2,1fr)}.fleet-fields{grid-template-columns:1fr}.pro-topline h1{font-size:16px}#threeWrap{min-height:360px}}
+
+/* V5.0 PRO: cotas y acciones */
+.v5-toolrow{display:flex;gap:7px;flex-wrap:wrap;margin:9px 0}.v5-toolrow button{width:auto;padding:9px 13px}
+.v5-panel{background:#fff;border:1px solid #dce5eb;border-radius:12px;padding:13px;margin:12px 0}
+.v5-panel h3{margin:0 0 7px;font-size:15px}.v5-mini{font-size:11px;color:#5c6b7b;line-height:1.55}
+.v5-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin:10px 0}
+.v5-metrics>div{background:#f0f5f8;border-radius:8px;padding:9px}.v5-metrics b{display:block;font-size:16px}.v5-metrics small{font-size:10px;color:#536577}
+#v5Diagram{display:block;width:100%;height:auto;max-height:330px}#v5Diagram text{font-family:Arial,sans-serif}
+.v5-note{border-left:3px solid #d68d25;background:#fff8e9;padding:9px;font-size:11px;margin-top:9px}
+@media(max-width:650px){.v5-metrics{grid-template-columns:repeat(2,1fr)}}
+
+.fleet-option.v5-rejected{border:2px solid #c92c3c;background:#fff5f5}
+.fleet-option.v5-rejected h3{color:#aa172a}
+.fleet-option.v5-pending{border-left:4px solid #d89a21}
+.fleet-cost-report{border:1px solid #cbd5e1;padding:12px;border-radius:10px;margin:12px 0;background:#f8fafc}
+.fleet-cost-report summary{cursor:pointer;font-weight:700}
+
+/* V5.0 PRO — resultados compactos, sin pérdida de detalle técnico */
+.fleet-summary-head{background:#fff5df;border-left:4px solid #df9419;border-radius:8px;padding:11px 13px;margin:10px 0;display:flex;flex-direction:column;gap:4px;font-size:13px}
+.fleet-summary-head span{font-size:11px;color:#6c5631}
+.fleet-compact{padding:13px 15px!important;margin:10px 0!important}
+.fleet-compact-top{display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.fleet-compact-name{font-size:15px;font-weight:750;color:#183d58}
+.fleet-compact-status{font-size:11px;color:#64748b;margin-top:3px}
+.fleet-compact-badge{border-radius:30px;padding:5px 9px;font-size:10px;font-weight:750;background:#fff3d7;color:#865a12}
+.fleet-compact-badge.bad{background:#fee2e2;color:#b91c1c}
+.fleet-compact-badge.preferred{background:#dff4ef;color:#086b5b}
+.fleet-compact-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:7px;margin:11px 0}
+.fleet-compact-metrics>div{background:#f1f6f9;border-radius:8px;padding:9px 10px;min-width:0}
+.fleet-compact-metrics small{font-size:10px;color:#64748b;display:block;margin-bottom:3px}
+.fleet-compact-metrics b{font-size:15px;display:block;overflow-wrap:anywhere}
+.fleet-compact-note{border-radius:7px;padding:9px 11px;font-size:11px;line-height:1.5;background:#fff6e7;border-left:3px solid #d99117}
+.fleet-compact-note.danger{background:#fff0f0;border-color:#d33}
+.fleet-compact-details{border-top:1px solid #e6edf2;margin-top:9px;padding-top:8px}
+.fleet-compact-details>summary,.fleet-subdetails>summary{cursor:pointer;color:#19435c;font-size:12px;font-weight:700;padding:5px 0}
+.fleet-detail-body{padding:7px 2px}
+.fleet-subdetails{border:1px solid #e4eaf0;border-radius:7px;padding:7px 10px;margin:8px 0}
+.fleet-overhang-list{max-height:190px;overflow:auto;font-size:11px;line-height:1.8;color:#41566b}
+.fleet-disclaimer{padding:10px 14px;border:1px solid #e4eaf0;border-radius:8px}
+@media(max-width:650px){.fleet-compact-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}}
 </style>
-</head>
+<style>
+/* Compact field-head unit controls, aligned with titles */
+.v5-field{min-width:0}.v5-fieldhead{display:flex;align-items:center;justify-content:space-between;gap:3px;margin-bottom:5px;min-height:26px}
+.v5-fieldhead label{margin:0;white-space:nowrap;font-size:11px}
+.v5-fieldhead .v5-unit{display:block;flex:0 0 59px;width:59px;min-width:59px;max-width:59px;height:29px;min-height:29px;padding:2px 2px 2px 6px;border:1px solid #b9cedf;border-radius:7px;background-color:#f0f6fa;color:#173c55!important;-webkit-text-fill-color:#173c55;font-family:Arial,sans-serif;font-size:12px!important;font-weight:700;line-height:normal;cursor:pointer;appearance:auto;-webkit-appearance:menulist;text-align:left;opacity:1!important}/* Ajuste visual: asegurar lectura completa de kg en Chrome/Windows. */
+.v5-fieldhead select.v5-unit[id="v5CargoWeightUnit"],
+.v5-fieldhead select.v5-unit[id="v5EditWeightUnit"]{flex:0 0 72px!important;width:72px!important;min-width:72px!important;max-width:72px!important;padding-left:9px!important;padding-right:4px!important;font-size:12px!important}
+.v5-fieldhead .v5-unit option{color:#173c55;background:#fff;font-size:13px}
+.v5-field>input{width:100%;min-width:0}
+@media(max-width:410px){.v5-fieldhead label{font-size:10px}.v5-fieldhead .v5-unit{flex-basis:55px;width:55px;min-width:55px;max-width:55px}}
+</style>
+
+<style>
+/* V5.0 PRO: paleta cerrada de colores, sin selector libre RGB */
+.v5-palette-line{display:flex;align-items:center;gap:6px;min-width:0}
+.v5-palette-select{flex:1;min-width:0;width:100%;font-size:11px!important;padding:8px 5px!important;height:38px}
+.v5-palette-swatch{flex:0 0 24px;height:24px;border-radius:6px;border:1px solid #a7b7c4;background:#e85b59}
+</style>
+
+<style>
+/* V5.0 PRO - alineación compacta y consistente del formulario */
+.v5-dimension-grid,.v5-dimension-grid + .grid2{gap:10px!important}
+.v5-dimension-grid>div,.v5-dimension-grid + .grid2>div{min-width:0}
+.v5-fieldhead{display:flex!important;align-items:center!important;justify-content:space-between!important;gap:4px!important;height:32px!important;min-height:32px!important;margin:0 0 6px!important;min-width:0}
+.v5-fieldhead label{font-size:11px!important;line-height:1.15!important;white-space:nowrap!important;margin:0!important;min-width:0}
+.v5-fieldhead select.v5-unit{box-sizing:border-box!important;flex:0 0 57px!important;width:57px!important;min-width:57px!important;max-width:57px!important;height:30px!important;padding:2px 15px 2px 7px!important;font-size:12px!important}
+.v5-fieldhead select.v5-unit[id="v5CargoWeightUnit"],.v5-fieldhead select.v5-unit[id="v5EditWeightUnit"]{flex:0 0 55px!important;width:55px!important;min-width:55px!important;max-width:55px!important;padding:2px 15px 2px 6px!important}
+.v5-palette-field{min-width:0;display:flex;flex-direction:column}
+.v5-palette-field>label{display:flex;align-items:center;height:32px;min-height:32px;margin:0 0 6px!important;font-size:11px;line-height:1.15}
+.v5-palette-line{height:42px;min-width:0;gap:7px!important}
+.v5-palette-select{height:42px!important;min-width:0!important;font-size:11px!important;padding:7px 19px 7px 7px!important;box-sizing:border-box!important}
+.v5-palette-swatch{flex:0 0 24px!important;width:24px;height:24px;box-sizing:border-box}
+.v5-field>input{height:42px;box-sizing:border-box}
+.v5-dimension-grid .v5-field>input{height:42px}
+@media(max-width:420px){
+.v5-dimension-grid{gap:8px!important}
+.v5-dimension-grid .v5-fieldhead{gap:2px!important}
+.v5-dimension-grid .v5-fieldhead label{font-size:10.5px!important}
+.v5-dimension-grid .v5-fieldhead select.v5-unit{flex-basis:54px!important;width:54px!important;min-width:54px!important;max-width:54px!important;padding-left:5px!important}
+.v5-dimension-grid + .grid2 .v5-fieldhead label{font-size:10.5px!important}
+}
+</style>
+
+<style>
+/* V5.0 PRO — ajuste definitivo: unidades legibles y encabezados sin solaparse */
+.v5-dimension-grid{column-gap:9px!important}
+.v5-dimension-grid>.v5-field{min-width:0!important}
+.v5-dimension-grid .v5-fieldhead{display:flex!important;gap:3px!important;justify-content:space-between!important;align-items:center!important;min-width:0!important;overflow:visible!important}
+.v5-dimension-grid .v5-fieldhead label{font-size:11px!important;flex:0 1 auto!important;white-space:nowrap!important;min-width:0!important;letter-spacing:-.15px!important}
+.v5-fieldhead select.v5-unit{
+ appearance:none!important;-webkit-appearance:none!important;
+ background-color:#eef6fc!important;
+ background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='7' viewBox='0 0 10 7'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='%23173c55' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E")!important;
+ background-repeat:no-repeat!important;background-position:right 5px center!important;background-size:9px 7px!important;
+ color:#173c55!important;-webkit-text-fill-color:#173c55!important;
+ text-align:left!important;text-align-last:left!important;
+ padding:2px 16px 2px 7px!important;font-size:12px!important;font-weight:700!important;
+ box-sizing:border-box!important;min-width:0!important;
+}
+.v5-dimension-grid .v5-fieldhead select.v5-unit{
+ flex:0 0 47px!important;width:47px!important;min-width:47px!important;max-width:47px!important;
+}
+.v5-fieldhead select.v5-unit[id="v5CargoWeightUnit"],
+.v5-fieldhead select.v5-unit[id="v5EditWeightUnit"]{
+ flex:0 0 60px!important;width:60px!important;min-width:60px!important;max-width:60px!important;
+}
+.v5-dimension-grid + .grid2 .v5-fieldhead{gap:5px!important}
+.v5-dimension-grid + .grid2 .v5-fieldhead label{font-size:11px!important;white-space:nowrap!important}
+.v5-palette-field>label{white-space:nowrap!important}
+@media(max-width:420px){
+ .v5-dimension-grid{column-gap:7px!important}
+ .v5-dimension-grid .v5-fieldhead select.v5-unit{flex-basis:44px!important;width:44px!important;min-width:44px!important;max-width:44px!important;padding-left:5px!important;padding-right:14px!important}
+ .v5-dimension-grid .v5-fieldhead label{font-size:10.5px!important}
+}
+</style>
+<style>
+.v5-vehicle-subselect{margin-top:8px}
+.v5-vehicle-subselect[hidden]{display:none!important}
+#vehicleCategory,#furgonPreset,#preset{width:100%;min-width:0;max-width:100%;box-sizing:border-box}
+#vehicleCategory{font-weight:650;background:#f1f6fa;border-color:#cbdbe8}
+#vehicleFurgonRow{border-left:3px solid #f35d62;padding-left:10px;margin-top:9px}
+</style></head>
 <body>
 <header>
   <img class="logo" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAA1wAAAFUCAIAAAC/S6rXAAAxLklEQVR4nO3db2hU95748dMf5z46XbgUTpnlKh2DSJvLRKVKWMdgxFS5o+CKSy6Ol8KlW7i7NyqLj9YLk0bYLX2QB4ndtuBeLkidYUNlDWiKzoiKSUrQojmhpohoipY5JFAWVh810N+DuZs6Y/7MOXPO+X7O+b5fj/pnZs7nzEy+8/n++3wNAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwJ9XVAcARCqfz6sOoc7o6Ojz589VRwEAobNt27Ksv/mbv8lkMqpjWcbk5OTc3JzqKBQjKYRGTNP88ccfVUdR59VXXyUpBJAwlmXZtr1jx47Ozs729vaenh7VEa1t//79Y2NjqqNQzFQdABCddevWqQ6hjuM4ZIQAksGyrF27du3bt6+3tzeVSqkOx7P79++rDkE9kkJoZMeOHapDqHPjxg3VIQBAS2zb/u1vf/v+++93dHSojqUlzB0bJIXQyoEDB1SHUGdqakp1CADgR21c8MMPP4x7LlhTKpVUhwAgWtVq9SdJ0um06rcEALyxLKtQKKhuPgPW19en+n0FECHLslQ3O41Mk6F6ALGRyHSwJpvNqn53ReA3CbrYsmWL6hDqVCqVxcVF1VEAwNpM0+zt7T1//rzqQMJy79491SGIQFIIXWzdulV1CHVu3bqlOgQAWFsmk/n888+TsXZwWa7rUgii5v+pDgCIiLStx3fu3FEdAgCsoVAoOI6T4IzQMIzr16+rDgFAtFQvWWlk27bqtwQAVmRZVrlcVt1SRkHaSVcKMX0MLQjMwBYWFlSHAADLy2QyV69ejWMNah9mZmZUhyAFSSG0sH37dtUh1KEmFgCxstns+Pi46iiiMzs7qzoEKVhTCC1s27ZNdQh1JicnVYcAAMvQLSN0HIdCEEtICqGFrq4u1SHUuXnzpuoQAKCRbhmhwXGj9V5RHQAQOtM0f/zxR9VR1Hn11VepgABAlHQ6/fjxY9VRRG3//v1jY2Oqo5CCkUIk37p161SHUIeaWACksW37q6++Uh2FAvfv31cdgiAkhUg+aRUKqYkFQBTTNCuViiZ7jRvMzc2pDkEQkkIkX2dnp+oQ6ly6dEl1CADws8HBwWSXp15JpVJRHYIsJIVIvu7ubtUh1GHrMQA5crnc8ePHVUehBseNNmCjCRLOsqxnz56pjqLOL37xCyogAJDAsqyHDx/qOXFsGMbOnTsnJiZURyEII4VIuLa2NtUh1KEmFgA5zp49q21GaBjGgwcPVIcgC0khEi6TyagOoc6FCxdUhwAAhmEY2Wz2yJEjqqNQieNGG5AUIuEOHDigOoQ6d+7cUR0CABimaX7yySeqo1CJ40ZfRlKIhJPWD6YmFgAJent79dxxvIRCEC9jowmSzLbt+fl51VHUeeUV/ugAKGaa5pMnT3ReTWgYRkdHx8zMjOooZGGkEEm2adMm1SHUYbYCgAS9vb2aZ4SGYTx69Eh1COKQFCLJ9uzZozqEOlQoBKCcaZqDg4Oqo1DMcRyOG30ZSSGSrKurS3UIde7evas6BAC627t3L8OEN27cUB2CRCSFSLKenh7VIdShJhYA5T788EPVIag3NTWlOgSJSAqRWOl0WnUIdVzXpSYWALUymYzmm45rWMyzLJJCJFZ7e7vqEOpcv35ddQgAdHfo0CHVIYjw9OlT1SFIRFKIxNq3b5/qEOpQEwuAWqZpDgwMqI5CvUqlwnGjyyIpRGJ1d3erDqEOBbEAqNXZ2ak6BBFu3bqlOgShSAqRTKZpSls3Mzs7qzoEAFr74x//qDoEEThudCUcroBkymQyjuOojuJnjuNs3rxZdRQA9GWa5o8//qg6ChFef/11tv0ty1QdABCKTCajOoQ61MQCoFbs5o5LpdLk5OTdu3e///77ubk51eFogaQQyXTgwAHVIdShJhYAtXp7e1WH0JRKpfLBBx9MTU2xFwRAMKrV6k+SSCuaCEA30lrFl5XLZZpKAAGzbVt149ZI9VsCQGvpdFp1K7iGfD6v+k0C08dIok2bNqkOoU6lUlEdAgCt7dixQ3UIK3Jdt6Ojg50fElCSBgm0detW1SHUoSYWALWkLbNeQkYIIFzFYlH1TEidbDar+i0BoDXVreDyqtWqbduq3xv8jDqFSKCfhK3hoyYWAIVs256fn1cdxTI6Ojo46kkUpo+RNAI3r5ERAlBo+/btqkNYRqlUIiOUhqQQSdPe3q46hDqlUkl1CAC0tm3bNtUhNHJd9/3331cdBRqRFCJppDV/ly5dUh0CAK0dPnxYdQiNTp48+fz5c9VRAEi66elp1Yun60g7cA+AVkzTVN0KLsM0qYgnESOFSBTTNDs6OlRHUefRo0eqQwCgr3Xr1qkOoVF/fz9H2MlEUohEkdb8ua7LFAkAhQSWrf70009Vh4DlkRQiUaQ1fyMjI6pDAKA1aWWrK5UKBRnEIilEonR2dqoOoc7U1JTqEABobffu3apDqPOXv/xFdQgA9FCtVlWvn64jsGgiAH1YlqW6FWxEqygZI4VIDsuyUqmU6ijqPH36VHUIAPTV1tamOoQ6ruvOzc2pjgIrYk84kkNa81epVALfYZdOp9vb27dt2/bmm28ahnHkyJFVrr6wsDA5OfnDDz/MzMy4rss6HkA3u3btUh1CHZZZC0dSiOSQ1vzdunUrkNfJZDKHDh3q6urq6elp/lm1B7+YNbque/369UuXLk1OTtJZB3Qgbe/dlStXVIcAQA/FYlH1apk6uVyuldtJp9OFQiGk2KrVaqFQoLA2kGwhNSC+2bat+i0BoAfVzV0j3+ups9lsZOeyVKvVfD5vWVagHwUA9WzbjqYZaZ7qtwSAHpLR/OXzeVUbqAuFAqkhkCS5XE5JY7KSYrGo+i3BGl5RHQBWZFlWbaR9aVHIizVIf/3rX0s7zy0QpVIpn8/7eGIul7t8+XLg8fjm9UbS6fTo6Kjyz/TYsWOfffaZkhOoisXiKvtmdFDbG7SwsFArbzk5ObmwsBDrE3Fs256fn1cdRZ1XXonuV8+2bcuy2tvbf/nLX3Z2dtba81aabq+tSqFQGBgY8HetBHBd92//9m9VRxEzbDQRoZb/7dixY+PGjW+++WZSE75mTE5O+nvitm3bgo2kRc3fiGmag4ODx48fDzWeJp05c+ZPf/rTP/zDP0xMTER8ac0zQuP/9ga9rFQq1bYHPX36NF4nxm7atEl1CHVKpVKor2/b9vbt22vFAcL4Pl+6dMnT47u6ugKPIUbY6YzYsCwrm8329fVJ2xuhnO+tD+VyWXXsdbLZbDNhZzIZaQW3a4rFomlG12lMp9Oq7zgeyuVyLpeLy0R/X1+f6jesTl9fX+D3aJpmNpsdGhqK4A/ZU/NommbY8Qjnb9IJiIhlWblcLpq2I758/9qpDrxRMzcS3ubiQJTL5ci2Ckpb/CRfuVzOZrNRJu4+xLSr1gzTNGvteZTxe2oe6WhxdAokymQyhUIhss2ksVatVv29ydKavzVvxDRNab+Xy6pWq9GUrRGeH4tVrVb7+vrEDhyqfnsaBfJG2bat5Os6PT3tKc58Ph99kKII7zLJxDF3YanlgtVq1XGcgYEBbdcIenL9+nV/T5RWoHX1G7Ft++uvv/ZUiVqVVCrlOE6A4ysr0Xzxk2+pVOrMmTPPnj0rFArSfgKljdO4rtvirp10Ol0sFufn55Xs3rhx44anx3d2doYTSDyEcaCUDkgKA2ZZVl9f31IuKO0oXuG8LqNeIq35W+VGbNt2HCdenYTx8fFQf+BN04xFiizZwMDAkydPRC2iam9vVx1CHd99TsMwMplMsVh8/Pixwu1QtT3pzevu7g4nkHgI6kApwKdaJ1L1eHm8+c48pM3Or3Qjtm3HdEVptVoNb32htNn/WJuenhYyRBfxers1+cuYLcsS0rB7+lgty1Idr2ItHigF+Bfl+RPJ5m/+S2Dzt+yNxDcjrKlWqyFNULL4KXBhbLP1Slqr6DVXNk1T1O5pT8FnMhnV8SompGsUO0wftySTyUxPT4+Pj8drNlAmx3H8LQFpa2sLPJhWLHsjtVnjWC8nSKVS586dC+OVpc3+J8CZM2fK5bLCVYamaUprFZ8+fdr8g9Pp9Ndff33mzJnw4vGkUql4ejzHms/NzakOIZZICn2qzSnEbnGYZBcuXPD3RGnN38s3YllW3DPCmiNHjoQxKdPb2xv4a6Knp+fJkyeRFRVqsG7dOiXXXYmnPmdfX9/jx49Fte1eV8i9ePyVhsKuUp5gJIV+5PP5Z8+ecQBDsO7cuePvidKav2vXrr34r6ZpXrx4MQEZYc3ly5eDLYBiWVZi3hxpapvHleSF0goCNLl117KscrksZ4BwidfmUfOfJ98nY4Gk0Jt0Oj09PX3+/HnVgSTQ/fv3/T1x9+7dwUbSonv37r34r+fOnUvY1tqTJ08G+GrSZv8TRlVeKK2rduXKlTUfk06nHz58KPOv9fbt280/WNXwsBx3795VHUJckRR6kM/npc0pJIm/JSC2bYsaZ3Ic58VaaH19fcnrsg8MDAQ4WLhr166gXgrLUpIXSuuqrdnnzGazjx8/FtWYvGhhYaH5B0s7cjp6DT1zNI+ksCmmaQ4NDTFAGB7fS0CkNX8vLijMZDIC56ECcfbs2aBeSto8YyLV8sLIDj4RuCRg9T5nX1/f+Ph4VLF45rV53Lp1a0iRxELrVcp1RlK4Ntu2v/zyy+PHj6sOJMl8LwGR1vwtLSi0LOvq1atqgwnPkSNHghp5St5IqkypVOrixYvR7EfesmVLBFdp3upbdwuFgvDOm9fm8eDBgyFFEgutVCkHSeEaapVEZK4ySRLfS0CkNX9L0xZnz56VNlgSrN/+9retvwiLn6LU09Pzhz/8IYILSeuqjY6OrvS/CoWCkjPrPLl586anx2v+g+X7ZCwYJIWrS0Btubh48OCBvyeKav6WFhTmcrnED4D96U9/av1FpM3+J96ZM2ciKOEkbUnASn3OWGSEhmE8evSo+QdTtJmtx60gKVwRGWFkXNf1tIx6ibTmr7bSzrKsP//5z6pjCV0qlWo9vdizZ08gwaB5V69eDXsSWVqPaNk+Z1wyQq8r5KQdOR09T1XK0YCkcHlkhFHyvQREWvNXm+VJ/MTxkkOHDrX4Cl1dXYFEgualUqlTp06F9/rSumrL9jnjkhEahjEyMuLp8fv27QspkljwfTIWakgKl2GaJhlhlHwvAZHW/M3Ozuowcbzk8OHDLb6CqNl/fQRbVKiBtK7ay33OfD4fl4zQMIypqSlPj+/u7g4nkHhosko5VkJSuIxz586REUZpZmbG3xNFNX+1HY46TBwv6ejoaCW3kDakpJVgK5C/aNu2bSG9sj8Nfc5sNhuv4mKeVsgJPHI6Ys1UKccqSAob5fN5fUZ6hJidnfXxLGnN31/+8pdTp07p1p1opfiItO0IWglvsFDakoAX+5zpdFpyPcJleVoh99Zbb4UXSSz4PhkLNSSFdTKZTLw6kQngewnIunXrAg+mRTGakwpKK8VHOjs7A4wEXoUxWGiaprQlAUtbdy3L+uqrr9QG45XX5jGCreXC+TsZC0tICn9mmubnn3+uOgrt+F4CIm2cSc/uRCufgqjZfw390z/9U+DbkKV11ZaqRJmmefHixdgN5L94QlIzpB05HbHVq5SjGSSFP+vt7RU1HakJ30tANG/+hPB9xK202X8NpVKpwAdrpXXVlvqcp06dkjaE2Yw7d+54ery0I6cjtkqVcjSJpPCvLMsaHBxUHYWOfC8B0bz5E8L30AuLnyT44x//GOwLSlsSUNu6m81mY7q0w1PzKPDI6Yj5PhkLS0gK/+rkyZOa/zmp4m8JCM2fHP72K7D4SYIjR44EO4Pc29sb4Ku1bnJy0rbtL774QnUgPnlqHqUdOR093ydjYQlJoWEYhmVZMe1Hxp3vJSA0f3L4O7+Y2X8hAhzbE9hVm5ubKxaL0qJqUqlU8vR4aUdOR8/fyVh4UbiHHcXF73//e9UhaOrWrVv+nhjT5s913evXry8VTvvuu+/eeOMNwzBee+21HTt27N69O6a/Xj4w+y/Enj17JiYmAnmptra2QF4nKJVKpa+vL45LCWu8nuErbUFnxLzm0MDyTNOsVqs/QYVsNuvvUysWi6pj96BcLudyuWZG1DKZTKFQiNcX0kcNatu2VUeNv5qenvbzF7icvr4+1XdTJ15/Ry/z2jyqjlexfD4f1DdZZ0wfG52dnfoMz0jjewlIXAqMl0qlDRs2vPPOO2NjY81MbczMzJw+fXr9+vXDw8MRhKfKpk2bVIeAv2rxWJoXSRupinvDfu/eveYfzPlAvk/GwotICo0PPvhAdQj68rcExN8itoi5rrthw4Z8Pu9jJ83i4uKJEyc6Ojpc1w0hNPViOvufVEFN+8alqxYLruvWKiw2SdqR09FbqlKOVuieFAqsv68P30tAtm/fHmwkgRseHl6/fn2LtfVnZmaSWsnv4MGDqkPAzwLZCR6LrlqMXL9+3dPjpR05HbGlKuVoke5JobSqWlppOKi+ecKbv6NHj544ccLf2X0NFhYWdu7c2frrSENPTJRAdoKzJCBYXptHaUdOR8z3yVhooPvu4z179qgOwYOE7a7yurduieTmr7+/v1gsBviCExMT/f39SSqZZNt2HL/JzI2uLl5t6cscx/nmm29UR/EzT82jwCmviP/GR0ZGorwcEkv+9rShoaFMJhPUSvAEME1T9WeyokKhEMYtW5al+s5Wk/gV7ul0Ol673b2qVqutv0vlcln1fXhQrVaLxWI+n09G65pOp1W/o3UC+UYBUZP8W1sul7PZbODH1SeAtOZvSbADhA2GhoZU39+KEpwUmqZZKBRUv8FRaP29Un0HzUpk05rP51W/r3WGhoZUvyWAd2LTi5AGnJJBWvO3JNSF9mK/qz/99FMCBlqWlcvl5M8kBKXF90ry93NJsVhM6ndVWqeRkoGIJZnpBX9Oq5PW/NVE8KmpvsUVhX3j0Uun0/GaDG1di10amW3pkmq1msvlgvp6CCSt95Lg2YPE03r38WuvvaY6hEb79+8PdRYyAXp7e1WH0MhxnAg+NZmbMxJWSdE0zb6+vsePH0tbth+2FofQJJdxqFQqHR0dY2NjqgMJi8Ajp58+fao6BPiUqHUVXkmrv++6boJbrkAIbP4Mw/jnf/7nCK7y7bffRnAVr7xWU5Msk8lcvXpV4BdMvu7ubtUhLM913Xw+769IflxIO3LacZxACnJBCa1HCqVhU/2apDV/hmE4jjMxMRHBhR4+fBjBVbySmap6ZZrm0NCQ4zhkhD5YliWzyrrruh0dHcnOCA3D2LVrl+oQ6ly4cEF1CPBP65HC3bt3qw6hzpUrV1SHIF0gRy8E66OPPormQr7LOoZKZqrqCQOELRLYVavZu3dv4jNCQ96U1507d1SHAP+0HimU9jNw//591SFIF8jRCwFyXVfz8V2ZqWqTGCAMhMCummEYpVJpZmZGdRRRkFZWnR+yWNN6pBCxI635+/TTTzVfPRPfFeUMEAZFWlet5v3331cdQhQEHjnd4pnvUEvrkUJppM0CSCOw+fvv//5v1SGoFNMV5bWS1AwQBkXaOhzDMI4dO/b8+XPVUURB2pHTMoskoHkkhYJILusggbTmzzCM2dlZ1SGoFMdD6G3b/vrrr5N0lnQgfK+9s21bYG792WefqQ4hItKOnI71ehIYJIWiHD9+PJvNqo5CLmnN3/DwcBzHyQI0NTWlOgRv8vn8/Py8zK2yavkeVxPYVevv79fnD7Orq0t1CHXu3r2rOgS0hKRQlvHxcZmrtiWQ1vxFvFv8V7/6VZSXa0aMRgVM0ywWi+fPn1cdSNJs3bpVdQiNzp07pzqE6Eirsn7v3j3VIaAlJIXiOI5TKBQ4Juhl0pq/27dvR3m5N954I8rLNSMuu0zS6fSTJ0+k7VKSw3Ec3889ePBggJG0znEcfTY6SPuZcF1Xk6WcCaZ1UlipVFSHsLyBgYHHjx9PT0/n8/lsNptOp9PpdFKPcm+SwOYv4hJoGzdujPJya6pUKrGYpMvn848fPxa47k2Ob775xvdzpXXVIqsbKoG0vYlJOt9IW1qXpBFe17SjoyPY2S7XdWt/tJOTkz/88MN33333/fffx6VXTfP35ptvRnzF1d26dUt1CGswTfPcuXMMEK7J97E00rpqhmGUy2XVIURH2t7ES5cuqQ4BrdI6KZycnNTqByOVStXut+GuK5XKrVu37ty5c/v2bbGJMs2ftMIfws8tsG2bojNN8n0sTXt7e7CRtMhxHLEtWBikHTmtSbXwZNM6Kfzhhx9UhyBCT0/P0hyQ4zgXLly4du1aNOf5Nk/z5s+yLGn5TcRLKj3JZrPj4+Oqo4gN31/mffv2BRtJi7Q6ddc0TWn76DUv0YXYS6fTP2EF1Wq1UCgIqRdtmqbq96ORaUbaoRL4XY3y9j0pFAqq35uY8T0LPD09rTr2OlqV9MpkMqrf7zrT09Oq3xIEQOuNJnHZO6lEKpUaGBiYn5+fnp5W3tS+9dZbagNoEP1JHtKWVMo8t8A0zXK5TGFqr/wtLBY4UqVVPRRpxcviWMoeL9M6KVxcXBS7AVmOjo6O8fFxtakhzZ+0JZUCKxTatv3kyRNpm2Hl890Grlu3LthIWuQ4jlb1UKQdOR1x3VaEROuk0DCM0dFR1SHEQy01LJfLSiaUaf56e3sjvuLqbt68qTqEOtlslm0l/vjeRS5t9Fq3kSppO8/u37+vOgQEQPekUNpvm3A9PT3z8/P5fD7i62re/AncZfLo0SPVIfwsl8uNj49Le4viwvcucmldtdgdutgKgUdOx6W6GVane1I4MzPjuq7qKGLm/Pnz5XI5smLaNH9tbW1RXm5Nos4tKBQKly9fVh1FjPnu4Ujrqglc0hAeaUdOsxArMXRPCg3D+Ld/+zfVIcRPT0/Pw4cPo5lKpvnbtWtXxFdc3cjIiOoQDOP/jjNmW0mL/PVwBI5eazVSJe3IaRZiJQZJofFf//VfqkOIpVQqNT8/H8HuE2nNX/QneUhbvCVhns40zS+//FKr4vNh8N3D2bJlS6CBtEq3kSppR07fvXtXdQgIBkmhsbCwILO+RiyMj4+HnRdKS4muXbsW8RWlpT7K5+ls2/7666/ZaNw63wM8dNXUkvblf/DggeoQEAySQsMwjFOnTqkOIcbCzgulpUQRN39C6oe/SG2Bz9r5ddIq5MWU7wEeaV014YcuBkvgkdNanS6YbCSFhmEYc3NzDBa24osvvggpd6H52759e5SXW1OlUom4cPeL0ul0fEvPCGxkfPdwpHXVJB+6GDhpR04L/GLDN5LCvzpx4oTqEGIslUoVi8UwTn6j+du2bVvEV1ydwnm6bDb7+PHjOGaEpVJpw4YN0mYkXNf118Ohq6aWtDbh0qVLqkNAYEgK/2phYeHYsWOqo4ixnp6eMH7zaP66uroivuLqVM3TZbPZ8fFxJZduRW2mO5/Pz83NSevhXL9+3d8Tpd2IbiNVhw8fVh1CnZmZGdUhIDAkhT/77LPPHMdRHUWMDQwMBD6EQPMnbUW5knML4pgRuq67f//+zZs3L31n9u3bpzakBr57ONK6asp3PkVJ4JHTokrZo0UkhT9bXFyU9gMcO8FWq6L5EzhPF301uDhmhMPDw+vXrx8bG3vxP3Z3dysKZ3m+ezjSRq+1OpiKI6cRKpLCOgsLCzt37lQdRYzVZsqCejWaP2l7PKOfp4tdRug4zoYNG06cONGwHScxPRzTNKV1nrUaqZLWJuh25HTikRQ2mpiYYHFhKwYHB4PacULz19nZGfEVVxfxPF3sMsJjx469/fbbyw6mJqaHI+1GRB26GAGOnEaoSAqX8fHHH/f396uOIq5SqVRQqQzNn7QJxyjPLYhXRlgbIPz4449XqteTmB6OtBsRcuhiZDhyGqEiKVze6dOnyQt9++STTwJ5Hc2bP8uypE043rt3L5oLxSsj7O/vX2mAcEliejjSRq+1GqkSeOS02lL2QKRyudxP8CWTybT45luWpfomGoVRiHEVmUxG9R3XqVar0dx4NptVfa/NqlarTX7Vq9Wq6mDr+N7DlJgbiSNpfxrlcln1W4KAMVK4mrGxsddff911XdWBxM+hQ4dafIW2trZAIglK9Cd5tJ5YB8t3WTtPYjRGWKlUNm7c2MweXoEDPP52kQu8Ea1GqjhyGmEjKVzDwsLC+vXrh4eHVQcSM63XF9y1a1cgkQQl+uZP2oRjBIW7M5lMXDLC/v7+d955p8ktDlu2bAk5HG8qlYq/J0rrqjmOo/DQxehJW9Cp1ZHTmiApXNvi4uKJEyc2bNhAaevmdXR0tHgaMs2ftONlw15Sadv21atXQ71EIFzX3blz5+nTp5t/SmIGeKR11S5cuKA6hEhJaxO0OnJaEySFzZqbm3v77bePHj1Katikd955p5Wna978tZhShyHUeTrbth3HkTY1+TLXdTs6OiYmJjw9S1oP59q1a/6eKO1GtBqpEtgmaHXktCZICj1YXFwsFoubN2/euXMnqeGaWtmlSPO3adOmKC+3plDn6UzTrFQq8jPCSqWyfv16H98EaT2cBw8e+HuitBtRcuiiKtu3b1cdQh3djpzWBEmhHxMTE5s3b96wYUN/fz/bUFbS29vr+7k0f9ImHMObpzNN88svv5RWfOdlw8PDv/nNb3xkxgK3x/rr4QjsqkV/6KJCHDmNCJAU+jc3N3f69On169d3dHQcO3aMscMGqVTKsix/z6X5O3jwYMRXXF1483SDg4PSjk17WX9//8sn1zWpvb098Hha4buHI230WreRKo6cRgQirbuWSIuLizMzMzMzMx9//LFlWW1tbZlM5sCBA7/+9a/lD36EzbZtfydQSWv+ojzJo0ZanhTSPF2hUDh+/HgYrxygY8eOffzxx76fnpgezp49e4KNpEVajVRx5DSiQVIYpOfPn9cSxGKxWPsvlmXV5lw8LdDeuHHjm2++WftnaYt4PPnVr37lb35HWvMX2UkeNQInHMOYp8tmswMDA4G/bLB27tzpdVtJA2k9HN8DPNJuJPqumkIcOQ3gZ+l0OpfLFYtF1RXsvcnn8/5uVnXgdSI7yWOJtKN0ljo5AZL2KS8rm822eJumaaq+iUa+F3WoDryR7xuJo3w+r/r9rhNGmwAJWFMYD3Nzc2NjY/l8/he/+MXRo0fjsrtl48aNPp4lrexFNCd5vGjfvn0RX3F1gc/TWZb11VdfBfuagWt9jNBI0ACPtNFr3UaqpB05HUEpeyhBUhgztbI469evj8Ui66VJcE9o/rq7uyO+4uqCnaczTfPixYvCC9AEkhEa8no4IyMj/p4o7Uai76qpJa1N0GpBp1ZICmNpcXHx3Xff9X1WlXCaN3+maUrbohTskspTp05JWzPaIKiM0JDXw5mamvL3RGk3otVIlWVZ0toErY6cBuLBNM1yuax6bclqfKw7sSxLddSNTDPS/ViZTEb1HdcJdkmltOWSL+vr6wvwfqvVquobquN7Fnh6elp17HUymUyAH5Nw0tqE6elp1W8JwsJIYYwtLi7628khWVtbm+oQ6oR6kseypP3aBThPZ9v25cuXg3q1MPT397dSfaaBZVnSZsn9DfAIHKmanZ1VHUJ0pLUJuh05rRWSwnhL3tGTNH8HDhyI+IqrC2qezjRN4TsWh4eHT58+HeALJqaHk5gbiSlpbYJWR07rhqQw9mKx46R5NH+7d++O+IqrC2pJpfClhJVK5eTJk8G+ZmJ6ONJu5MaNG6pDiJS0arVaHTmtG5LC2EvYgmvNm7/ETDg2EF6n2nXdv//7vw988CkxPRxpN3LlyhXVIUSHI6cRJZJChMjr7DbN35YtW6K83JoCmaezLOuLL74IJJ6Q/N3f/V0YRe8S08ORNnqt1UiVtCOnk1r1AjUkhQiR1/oXNH9bt26N+IqrC2RJ5dmzZ6UNf77o6NGjYaT+ienh2LYt7ePTaqRK2pHTo6OjqkNAiEgKY0/azE4rpKVE0Td/0koEt76kMpfLSRswe1GpVApp+4u0Ho7vxcfSbkS3kSqOnEaUSArjzTRNyb+4MzMznh5/8ODBkCLxJ/rmT9qn2eI8nWVZf/7zn4MKJnCu67777rshvbi0AR7fG4boqqklbXvWgwcPVIeAEJEUxtvevXtVh7Aar2c0a978STte1mh5nk74xPHevXvDq2ySmAEeumoKSWsTXNdNXh00ICFM05R2XkIDT7eTTqdVx1sn2JM8miHttI8W51Wz2azqO1jN0NBQUB/cslTfXyPLspJxIwIXa4YnYW0C5GOkMMbOnTsneRjG69Kf9vb2kCLxJ8CTPJq0bdu2iK+4ulYqFJqmKXnHseu6gVclfJHAAR5/26ul3YiRxIr9q9i3b5/qEOokrAIaXkZSGEumaQ4NDUlbf9bA63I0mr/Dhw9HfMXVtTJP94c//EFyj+W9994L9UgMaRuGfPdwpHXVElarf03d3d2qQ6jjdZk4YsdUHQA8syzr4sWL0pbfvcxrgVnNmz/TNKUdL+t7SaVt22fOnAk2mAA5jjM2NhbqJTo7O0N9fa9893DoqikksE3Q6shpPTFSGCeWZRUKhWfPnsnPCA3DuHnzZvMPFtj8PXr0KMrLrVu3LsrLramVFeVhL9drUQQ7JxLTw0nMjcTRW2+9pTqEOrodOa0nRgpjwDTNzs7O3t7e48ePq46lWY7jeFrDJC0l8hp/6xIz4ZjNZiUvbCiVSmGXPhbYw/E3wCPwRiLuqqnFkdOIHkmhRLZtW5a1Y8eOjRs3dnV1xWJcsMHZs2c9PV5aShR985eYCcdPPvkk2EiCderUqbAvkZgBHrpqakk7mMDrCVWIoyQnhblc7vLly6qj0JSnuWOD5s8went7I77i6vzN0+XzeWljSy9yHCeCE9ISM8BDV00taUdOt1KOAHGR5DWF0gp86MNxHK8phebNn2VZ0vbq+phwNE1zcHAwjGCC8q//+q8RXEVaD8frlq8l0m5Eq5EqgW2CVkdOayvJSaG0EwX08dFHH3l6PM1fW1tblJdbk78Jx97eXmmfY4OrV69GcBVpPRzfZxVKuxGtRqq2bNmiOoQ6uh05ra3EJoWmacZxKV4yjIyMeHo8zd+uXbsivuLq/M3TCR8mLJVKEeydtG1bWmbsr4dDV00taUdO37p1S3UIiEJik0JpS6T10d/f7/Wnl+ZP2uItHxOO2WxWWg7R4PPPP4/gKps2bYrgKs3z3cOhq6aWtDbh2rVrqkNAFBKbFEr7i9KHj+EiaR9W9M2ftBouPiYchW86NlqYRfUkMT2cxNxITElrE3yXske8JDYplFbgQxP9/f0+akZo3vzZth3l5ZrhdZ4uk8lI3nRcE83kYwSVsT3x3cOR1lW7c+eO6hCiw5HTUCWxSaG0Ah86cF333//9370+i+Zv+/btUV5uTT7m6f7xH/8xjEgC5DhONBeStpTZdw9HWlft9u3bqkOIDkdOQ5VkJoUCl0jr4L333vOxkJ/mT1rtpNHRUU+PtyxL/lk7r7/+egRXSUwPJzE3ElPS2gSt9n1rLplJobQCHzqoVCpjY2M+nkjzJ6120t27dz09XtrW6WVF00tMTA8nMTcSU4cPH1YdQh2vhxEgvpKZFEo7UUAH+Xze3xOlpUTRN39xn3D8l3/5l5AiiR1pPRzfZxVKuxGtRqo4choKJTMplFaIP/F27tzpb3JHYDnJiJs/afN0rut6+igty5L2Ca7ENMM91dM0TWkDPP7OKjToqiklrZ6a67paHTmtuWQmhdKWSCdbf3//xMSEv+fS/Enb43n9+nVPj4/F3HFNeJvPTNPM5/NPnjxJxgAPXTW1pLUJXg8jQKwlMCkUWOAjwSqVyunTp30/neZPWu0krxOOv/vd70KKJHCDg4OBDxZallVLB8+fPy9tc5vjOP56OHTV1JLWJmh15DQSmBRKO1EgwSqVym9+85tWXoHmr7u7O+Irrs7ThKNpmjEalU+lUgEOFqbT6UKh8OzZM4HpYI2/swoNumqqSaunptWCToS7yEaJPXv2qA5BC7WMsMXDZDVv/izLkjbhODs72/yDpQ0prWlwcPB//ud//G2Tr7Esa9euXR9++GHDB1cqlWzbFjXr6ruHQ1dNIYH11J4+fao6BKAF5XL5J4SsXC63PhNnWZbq+2gU9l6EBplMRvUd15menvYUfy6XUx2yH8Vi0bIsT3dqWVYul1upbcnlcoZhVKvViG9kdb73MCXmRuJIWptQLpdVvyWIVAJHCkV11hMpkDFCQ145ScdxWr8pT6TVTvI64SitcEmTjhw5snv37pMnT5bL5VW2Wtu2vWnTpj179hw+fHilAd1KpZLP5xcWFhIzwJOYG4kpaTu3dDtyGklLCrXqUypRKpXefffdQJInac3fhQsXIr6itNpJV65c8fR4aYVLmpdKpc6fP28Yhuu6tQ3Xly5deu2112rL6ZqcCD569GixWKz985YtW0IM17tKpeLvj5SumlrSFnRqdeQ0jOQlhdIK8SfMi7+CraP5k7ZL4/79+54en4BR+VQqVfsUPH0WpVLpxIkTL44ybt26NfjgWuB7gEfa6HX0XTW14t4mIO6SlhTu27dPdQjJ5Lru3r17fdfCXZbmzZ/A2klzc3OqQ5DOdd333nvv5a0qienhSBu91mqkijYByiWtJI20Ah/JUCqVNm7cGGxGSPMnrXZSpVLx9HivezUSYHh4eOPGjctuXpbWw7l9+7a/J0q7Ea1GqqS1CbodOQ0jYSOFAo+MjLuVxkVaR/MnbcJxdHTU0+MFpvXhcRznd7/73Ur9IoFvhb9jJwXeiFYjVdLqqVGhUEOJGil86623VIeQKP39/SuNi7SO5u/gwYMRX3F1d+/eVR2CUEePHn377bdXGSnfvn17lPGsyXcPh66aWtJ2btEmaChRI4XSlkjHV6lUOnXqVKh9dJo/abs0Hjx4oDoEcUql0vvvv7/mGWvSSvP47uHQVVNLWptw79491SEgaolKCqUtkY6jCNLBGs2bP4G1k7xOOPqboIwLx3EOHjzY5B+CtB7OzZs3/T1R2o1oNVIlrU3Q7chp1CRq+nj37t2qQ4ix4eHhDRs25PP5CDJCmj9ptZN8zNMl9QfDdd39+/dv3ry5yT8E0zSl9XAePXrk74nSbkSrkSppG9hr9Tuhm+QkhbZtSyvEHwuu6x47duzVV189ceJEZGu6af6k1U66dOmSj2c5jhN4JAq5rnv06NH169d7Wkcr7QBo3z0cumpqSTty2l+bgLhLzvSxtCXS8g0PD//nf/5nsIVmmkTzJ612kr+vwTfffJOY/f79/f2Dg4M+spDE9HAScyMxJa1N0G1BJ2qSkxRKK/Ahk+u6IyMjIyMjU1NTCg+Pktb8RZwZC6yd5G/C8fPPP5dW1s4H3+lgTWJ6OIm5kTiyLEtam6DVkdNYkpykUFo3V5RKpTI6Onrz5k0l44INBKZEs7OzUV5OWu0kx3H8pUS+NzQI0WI6WCOth+N7gEfajUhorCLDkdMQIjlJYQJGLIJVKpUmJydv3rw5Ozsr6s9bYEoU8fsjrXbSjRs3/D3x+fPnlUpF2u6EZgSSDhoJGuChq6ZWYtoExF1CkkJpS6Sj5zjON998Mzk5effu3QcPHkguF0LzJ6120tTUlO/nfvDBBzFKCl3X/fTTTwNJB2sSM8BDV00taW3ClStXVIcANRKSFEor8BGeWvJn/N+Cm9pUUbxOgqL5k1Y7qZUV5RMTE6VSSf44veM4H3300cjISLCphrQezoULF/w9UdqN6DZSJa1N0OrIabzoFdUBBCOdTidvTeHMzMz//u//1v55YWEhMdUZcrncL3/5S9VR/Gx0dDTi9zafz0d5uTUVi8VWnm7b9vz8fFDBBK5UKv3Hf/zHxMREGC+ezWbfeOONMF7Zn8nJSX9dxMTcSEwlrE0AAOgrl8v9JEy1Wi0UCrZtq35vAAAAdFIoFFTngX9VLBaz2axpJmRtDAAAQMyozQunp6dzuZxlWarfBgAAAO1lMplqtRpxLtjX18c0MQAAgCymafb19YWdCw4NDTEuCAAAIJ1lWX19fcGOGhaLxb6+PoqSAkBIElKSBoBMmUzm0KFDXV1dPmpcl0qlb7/99s6dO/fv39eqQAkAKEFSCCAi6XS6vb19qUrli2XMv/3224cPHxqG8d13333//fdPnz7V6kALAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAS5/8DSKqtIxJWMqwAAAAASUVORK5CYII=" alt="Sharf">
-  <div><div class="headtitle">3D LOAD PLANNER <span class="accent">| PROJECT LOGISTICS</span></div><div style="font-size:11px;color:#bbb;text-align:right">Tecnología y procesos para llegar lejos</div></div>
+  <div><div class="headtitle">SHARF LOAD PLANNER <span class="accent">| V5.0 PRO</span></div><div style="font-size:11px;color:#bbb;text-align:right">V5.0 PRO · Tractocamión T3S3 y plataforma 13 m · geometría referencial</div></div>
 </header>
 <main>
 <section class="card left">
 <h2><span class="step">01</span> Equipo / contenedor</h2>
-<label>Preset</label><select id="preset"></select>
+<label for="vehicleCategory">Tipo de unidad</label>
+<select id="vehicleCategory" aria-label="Tipo de unidad">
+<option value="general">Plataformas, contenedores y especiales</option>
+<option value="furgon">Furgones y Porter</option>
+</select>
+<div id="vehicleFurgonRow" class="v5-vehicle-subselect" hidden>
+<label for="furgonPreset">Modelo referencial de furgón</label>
+<select id="furgonPreset" aria-label="Seleccionar furgón o Porter"></select>
+</div>
+<div id="vehicleGeneralRow" class="v5-vehicle-subselect">
+<label for="preset">Equipo / referencia</label><select id="preset"></select>
+</div>
 <div class="grid3 gap"><div><label>Largo útil m</label><input id="cl" type="number" step=".001"></div><div><label>Ancho útil m</label><input id="cw" type="number" step=".001"></div><div><label>Alto útil m</label><input id="ch" type="number" step=".001"></div></div>
 <div class="grid2 gap"><div><label>Payload kg</label><input id="payload" type="number"></div><div><label>Tara kg</label><input id="tare" type="number"></div></div>
 <div class="grid2 gap"><div><label>PBV límite / referencia kg</label><input id="pbvlimit" type="number" value="0" title="0 = usar tara + payload"></div><div><label>Líneas de ejes (modular)</label><input id="axles" type="number" min="1" value="12"></div></div>
@@ -77,14 +254,35 @@ table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:7px;borde
   <div><label>Límite reacción tracto / kingpin (kg)</label><input id="frontLimit" type="number" step="1" value="18000"></div>
   <div><label>Límite grupo ejes remolque (kg)</label><input id="rearLimit" type="number" step="1" value="30000"></div>
 </div>
-<div class="small gap" id="equipnote">Las dimensiones y capacidades de transporte especial son parámetros de planificación editables. Validar siempre contra ficha técnica/configuración real del proveedor.</div>
+<div class="small gap" style="color:#9b3d00"><b>V5.0 — PROTOTIPO POZO ÚTIL:</b> ruedas, cabina y cama baja son representaciones 3D esquemáticas. No se ha validado distribución por ejes, estabilidad, capacidad certificada ni rutas. Para cubicar, verificar dimensiones y pesos reales del proveedor.</div><div class="small gap" id="equipnote">Las dimensiones y capacidades de transporte especial son parámetros de planificación editables. Validar siempre contra ficha técnica/configuración real del proveedor.</div>
+<div class="grid2 gap"><div><label>Altura piso sobre carretera (m)</label><input id="deckHeight" type="number" min="0" step=".01" value=".00"></div><div><label>Altura total límite (m)</label><input id="roadLimit" type="number" min="0" step=".01" value="5.20"></div></div>
+<div class="grid2 gap"><div><label>Apoyos bajo carga (m)</label><input id="supportHeightRoad" type="number" min="0" step=".01" value="0.00"></div><div><label>Accesorios sobresalientes (m)</label><input id="accessoryHeight" type="number" min="0" step=".01" value="0.00"></div></div>
+<div class="small gap">La altura de cubierta se utiliza también para colocar el pavimento y las ruedas en el 3D. Valores iniciales orientativos, no certificados. Cambiarla modifica la representación visual y el cálculo de altura total.</div><div class="small gap">Umbral operativo Lima 5.20 m: referencia editable, NO límite legal ni garantía de gálibo. La altura de transporte se calcula desde la carretera: piso + carga. Configurar con datos reales del equipo; no equivale a autorización de tránsito.</div>
 <hr>
-<h2><span class="step">02</span> Mercadería</h2>
-<div class="grid3"><div><label>Descripción</label><input id="name" value="Bulto"></div><div><label>SKU / Código</label><input id="sku" value=""></div><div><label>Cantidad</label><input id="qty" type="number" value="1" min="1"></div></div>
-<div class="grid3 gap"><div><label>Largo m</label><input id="l" type="number" step=".001" value="1"></div><div><label>Ancho m</label><input id="w" type="number" step=".001" value="1"></div><div><label>Alto m</label><input id="h" type="number" step=".001" value="1"></div></div>
-<div class="grid2 gap"><div><label>Peso unit. kg</label><input id="kg" type="number" value="100"></div><div><label>Color</label><input id="color" type="color" value="#ff6568" style="height:37px;padding:3px"></div></div>
+<h2><span class="step">02</span> Mercadería</h2><p class="small">Nueva simulación: sin carga precargada. Ingresa tus medidas y peso reales; los ejemplos anteriores no se cargan automáticamente.</p>
+<div class="grid3"><div><label>Descripción</label><input id="name" value="" placeholder="Nombre de la carga"></div><div><label>SKU / Código</label><input id="sku" value=""></div><div><label>Cantidad</label><input id="qty" type="number" value="1" min="1"></div></div>
+<div class="grid3 gap v5-dimension-grid"><div class="v5-field"><div class="v5-fieldhead"><label for="l">Largo</label><select id="v5CargoUnitL" class="v5-unit" aria-label="Unidad de largo"><option value="0.01" selected>cm</option><option value="0.001">mm</option><option value="1">m</option><option value="0.0254">in</option><option value="0.3048">ft</option></select></div><input id="l" type="number" min="0" step="any" placeholder="Largo"></div><div class="v5-field"><div class="v5-fieldhead"><label for="w">Ancho</label><select id="v5CargoUnitW" class="v5-unit" aria-label="Unidad de ancho"><option value="0.01" selected>cm</option><option value="0.001">mm</option><option value="1">m</option><option value="0.0254">in</option><option value="0.3048">ft</option></select></div><input id="w" type="number" min="0" step="any" placeholder="Ancho"></div><div class="v5-field"><div class="v5-fieldhead"><label for="h">Alto</label><select id="v5CargoUnitH" class="v5-unit" aria-label="Unidad de alto"><option value="0.01" selected>cm</option><option value="0.001">mm</option><option value="1">m</option><option value="0.0254">in</option><option value="0.3048">ft</option></select></div><input id="h" type="number" min="0" step="any" placeholder="Alto"></div></div>
+<div class="grid2 gap"><div class="v5-field"><div class="v5-fieldhead"><label for="kg">Peso unitario</label><select id="v5CargoWeightUnit" class="v5-unit" aria-label="Unidad de peso unitario"><option value="1" selected>kg</option><option value="0.001">g</option><option value="1000">t</option><option value="0.45359237">lb</option></select></div><input id="kg" type="number" min="0" step="any" placeholder="Peso real"></div><div class="v5-palette-field"><label for="color">Color</label><div class="v5-palette-line"><select id="color" class="v5-palette-select" aria-label="Color de mercancía"><option value="auto" selected>Automático por código</option><option value="#e85b59">Rojo coral</option><option value="#2e86de">Azul</option><option value="#e5a52c">Amarillo mostaza</option><option value="#16a085">Verde turquesa</option><option value="#9b59b6">Morado</option><option value="#d35400">Naranja</option><option value="#27ae60">Verde</option><option value="#34495e">Azul pizarra</option><option value="#c0398b">Rosa</option><option value="#6482d4">Azul lavanda</option><option value="#7f8c8d">Gris</option><option value="#8e6548">Marrón</option></select><span id="v5ColorSwatch" class="v5-palette-swatch" aria-hidden="true"></span></div></div></div>
 <div class="grid2 gap"><div><label>Rotación</label><select id="rotate"><option value="1">Permitida</option><option value="0">Bloqueada</option></select></div><div><label>Apilable</label><select id="stack"><option value="1">Sí</option><option value="0">No</option></select></div></div>
+<div class="grid2 gap"><div><label>Separación de seguridad (cm)</label><select id="clearance"><option value="0">0 cm</option><option value=".05" selected>5 cm</option><option value=".10">10 cm</option><option value=".20">20 cm</option></select></div><div><label>Geometría visual</label><select id="visualType"><option value="box">Bulto / caja</option><option value="pickup">Camioneta (referencial)</option><option value="machine">Equipo industrial (referencial)</option></select></div></div>
+<details class="pro-details" id="v5PalletDetails"><summary>Base de apoyo / paletizado (opcional)</summary><div class="pro-inner">
+<label>Condición de la carga</label><select id="v5PalletMode"><option value="unknown">Sin confirmar</option><option value="none">Sin pallet / apoyo adicional</option><option value="included">Pallet o base YA incluido en medidas y peso</option><option value="extra">Agregar pallet o base a medidas y peso</option></select>
+<div class="grid2 gap"><div><label>Altura adicional de base (m)</label><input id="v5PalletH" type="number" value="0.15" min="0" step="0.01"></div><div><label>Peso adicional por bulto (kg)</label><input id="v5PalletKg" type="number" value="0" min="0" step="1"></div></div>
+<div class="small gap">Para cargas pesadas, validar capacidad y huella de la base. La base adicional se suma solo en modo «Agregar»; confirmar que las medidas declaradas no la incluyan.</div></div></details>
+<div class="grid2 gap"><div><label>Prioridad de descarga</label><select id="v5Priority"><option value="B">B · Intermedia</option><option value="A">A · Descargar primero</option><option value="C">C · Descargar al final</option></select></div><div><label>Peso máximo encima (kg)</label><input id="v5TopLoad" type="number" min="0" step="1" value="0" title="0 = no admite peso encima; indicar capacidad certificada"></div></div>
 <button class="primary gap" onclick="addCargo()">+ Agregar mercadería</button>
+<details id="v5CargoGroups" class="pro-details gap" open><summary>📦 Mercancías registradas por código · <span id="v5GroupCount">0 tipos</span></summary>
+<div class="pro-inner"><div id="v5GroupList" style="font-size:12px;line-height:1.55">Todavía no hay mercancías.</div><p class="small">Selecciona un grupo para identificar sus bultos. Cada código recibe un color automático diferente. Para apilar, declara una capacidad de soporte real en «Peso máximo encima».</p></div></details>
+<details id="v5EditExisting" class="pro-details gap" open><summary>✏️ Editar mercancía registrada y recubicar</summary>
+<div class="small gap">Selecciona un código existente. Los cambios se aplican a todos sus bultos. Se recalcula la distribución completa y se actualizan simultáneamente 3D, plano, listado, advertencias y estadísticas.</div>
+<div class="gap"><label>Código de mercancía</label><select id="v5EditCode"></select></div>
+<div class="grid3 gap v5-dimension-grid"><div class="v5-field"><div class="v5-fieldhead"><label for="v5EditL">Largo</label><select id="v5EditUnitL" class="v5-unit" aria-label="Unidad de largo"><option value="0.01" selected>cm</option><option value="0.001">mm</option><option value="1">m</option><option value="0.0254">in</option><option value="0.3048">ft</option></select></div><input id="v5EditL" type="number" min="0" step="any" placeholder="Largo"></div><div class="v5-field"><div class="v5-fieldhead"><label for="v5EditW">Ancho</label><select id="v5EditUnitW" class="v5-unit" aria-label="Unidad de ancho"><option value="0.01" selected>cm</option><option value="0.001">mm</option><option value="1">m</option><option value="0.0254">in</option><option value="0.3048">ft</option></select></div><input id="v5EditW" type="number" min="0" step="any" placeholder="Ancho"></div><div class="v5-field"><div class="v5-fieldhead"><label for="v5EditH">Alto</label><select id="v5EditUnitH" class="v5-unit" aria-label="Unidad de alto"><option value="0.01" selected>cm</option><option value="0.001">mm</option><option value="1">m</option><option value="0.0254">in</option><option value="0.3048">ft</option></select></div><input id="v5EditH" type="number" min="0" step="any" placeholder="Alto"></div></div>
+<div class="grid2 gap"><div class="v5-field"><div class="v5-fieldhead"><label for="v5EditKg">Peso unitario</label><select id="v5EditWeightUnit" class="v5-unit" aria-label="Unidad de peso unitario"><option value="1" selected>kg</option><option value="0.001">g</option><option value="1000">t</option><option value="0.45359237">lb</option></select></div><input id="v5EditKg" type="number" min="0" step="any" placeholder="Peso"></div><div><label>Separación de seguridad</label><select id="v5EditGap"><option value="0">0 cm</option><option value=".05">5 cm</option><option value=".10">10 cm</option><option value=".20" selected>20 cm</option></select></div></div>
+<div class="grid2 gap"><div><label>Prioridad de descarga</label><select id="v5EditPriority"><option value="A">A · Primero</option><option value="B">B · Intermedia</option><option value="C">C · Al final</option></select></div><div><label>Apilable</label><select id="v5EditStack"><option value="1">Sí</option><option value="0">No</option></select></div></div>
+<div class="grid2 gap"><div><label>Soporte máximo encima (kg)</label><input id="v5EditTop" type="number" min="0" step="1"></div><div class="v5-palette-field"><label for="v5EditColor">Color del código</label><div class="v5-palette-line"><select id="v5EditColor" class="v5-palette-select" aria-label="Color del código"><option value="#e85b59">Rojo coral</option><option value="#2e86de">Azul</option><option value="#e5a52c">Amarillo mostaza</option><option value="#16a085">Verde turquesa</option><option value="#9b59b6">Morado</option><option value="#d35400">Naranja</option><option value="#27ae60">Verde</option><option value="#34495e">Azul pizarra</option><option value="#c0398b">Rosa</option><option value="#6482d4">Azul lavanda</option><option value="#7f8c8d">Gris</option><option value="#8e6548">Marrón</option></select><span id="v5EditColorSwatch" class="v5-palette-swatch" aria-hidden="true"></span></div></div></div>
+<div id="v5EditDirty" class="small gap" aria-live="polite">Selecciona el código y aplica los cambios.</div>
+<button class="primary gap" type="button" id="v5ApplyEdit">✓ Aplicar cambios y recubicar</button>
+</details>
 <div class="importbox gap">
 <label>Importar Packing List (.xlsx / .xls / .csv)</label>
 <input id="fileImport" type="file" accept=".xlsx,.xls,.csv,text/csv" onchange="importPackingList(this.files[0])">
@@ -109,6 +307,9 @@ table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:7px;borde
 <div class="oogpanel">
   <div class="alertbox" id="weightAlert"><b>PBV / Payload</b><span>Sin alerta.</span></div>
   <div class="alertbox" id="oogAlert"><b>OOG / Sobredimensión</b><span>Sin alerta.</span></div>
+<div class="alertbox" id="wellAlert"><b>Pozo útil de cama baja</b><span>Selecciona cama baja para validar la zona.</span></div>
+<div class="alertbox" id="roadAlert"><b>Altura total de transporte</b><span>Sin alerta.</span></div>
+<div class="alertbox" id="supportAlert"><b>Estiba y soportes</b><span>Sin alerta.</span></div>
 </div>
 
 
@@ -118,11 +319,37 @@ table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:7px;borde
  <div class="techbox"><span>Reacción grupo trasero</span><b id="rearReaction">—</b><div class="axlebar"><i id="rearBar" style="width:0%"></i></div></div>
  <div class="techbox"><span>Balance técnico preliminar</span><b id="balanceStat">SIN DATOS</b></div>
 </div>
+
+<div class="fleet-panel" id="fleetPanel">
+  <h2>05 | Selección inteligente de vehículos y flota · V5.0</h2>
+  <p class="small">Evalúa <b>todos los bultos del packing list</b> en múltiples vehículos. La capacidad, ancho y altura de cada unidad son <b>referenciales, no homologados</b>. No sustituye una revisión de ingeniería.</p>
+  <div class="fleet-fields">
+    <div><label>Tipo de mercancía</label><select id="fleetNature"><option value="auto">Detectar por descripción + advertir</option><option value="general">General / industrial</option><option value="electrical">Gabinetes / equipos eléctricos</option><option value="transformer">Transformador de potencia</option><option value="machine">Maquinaria</option><option value="fragile">Delicada / sensible</option></select></div>
+    <div><label>Centro de gravedad / estabilidad</label><select id="fleetCG"><option value="unknown">Desconocido (validación pendiente)</option><option value="normal">Datos verificados / estable</option><option value="high">Alto o desfavorable</option></select></div>
+    <div><label>Restricción del fabricante</label><select id="fleetManufacturer"><option value="unknown">No confirmada</option><option value="flat">Autoriza plataforma, según condiciones</option><option value="low">Exige cama baja / cama cuna</option><option value="special">Exige ingeniería especial</option></select></div>
+    <div><label>Separación entre bultos (cm)</label><select id="fleetGap"><option value="0">0</option><option value="5">5</option><option value="10" selected>10</option><option value="20">20</option></select></div>
+    <div><label>Altura de apoyos (m)</label><input id="fleetSupport" type="number" min="0" step=".05" value="0.15"></div>
+    <div><label>Referencia altura ruta (m)</label><input id="fleetRoad" type="number" min="0" step=".05" value="5.20"></div>
+    <div><label>Capacidad plataforma (kg)</label><input id="fleetFlatKg" type="number" min="1" value="30000"></div>
+    <div><label>Capacidad cama baja (kg)</label><input id="fleetLowKg" type="number" min="1" value="35000"></div>
+    <div><label>Capacidad cama cuna (kg)</label><input id="fleetCradleKg" type="number" min="1" value="40000"></div>
+  </div>
+  <details class="pro-details" id="fleetCosts" style="margin:9px 0"><summary style="cursor:pointer;padding:10px;font-weight:700">Comparativo económico opcional · solo alternativas técnicamente admisibles</summary>
+    <div class="fleet-fields" style="padding:10px"><div><label>Tarifa plataforma por unidad (S/)</label><input id="priceFlat" type="number" min="0" placeholder="Sin cotización"></div><div><label>Tarifa cama baja por unidad (S/)</label><input id="priceLow" type="number" min="0" placeholder="Sin cotización"></div><div><label>Tarifa cama cuna por unidad (S/)</label><input id="priceCradle" type="number" min="0" placeholder="Sin cotización"></div><div><label>Tarifa modular por unidad (S/)</label><input id="priceModular" type="number" min="0" placeholder="Sin cotización"></div></div>
+    <p class="small" style="padding:0 10px">Tarifas ingresadas manualmente, sin IGV ni adicionales salvo que la cotización los incluya. No se comparan alternativas rechazadas o sin validación técnica completa.</p>
+  </details>
+  <button class="fleet-btn" onclick="calculateFleet()">Evaluar seguridad, seleccionar flota y comparar</button>
+  <button onclick="newV5Simulation()" style="margin-left:6px">Nueva simulación</button>
+  <button onclick="restoreFleetPacking()" id="fleetRestore" style="display:none;margin-top:7px">Restaurar packing list completo</button>
+  <div class="fleet-results" id="fleetResults"><p class="fleet-muted">Sin carga registrada. Ingresa tus propios bultos o importa un packing list para comenzar.</p></div>
+</div>
 <div class="card" style="margin-bottom:14px">
   <h2><span class="step">04</span> Visualizador 3D interactivo</h2>
   <div id="threeWrap">
     <div class="viewbar">
       <button onclick="set3DView('iso')">Isométrica</button>
+<button id="v5ExteriorBtn" onclick="setVehicleDetailMode('exterior')">🚛 Exterior detallado</button>
+<button id="v5TechnicalBtn" onclick="setVehicleDetailMode('technical')">📐 Vista técnica</button>
       <button onclick="set3DView('top')">Superior</button>
       <button onclick="set3DView('side')">Lateral</button>
       <button onclick="set3DView('rear')">Trasera</button>
@@ -135,12 +362,14 @@ table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:7px;borde
     <canvas id="threeCanvas"></canvas><div id="labelLayer"></div><div id="tooltip3d"></div>
     <div id="threeError"><div><b>El módulo 3D necesita conexión a internet</b><br><span class="small">Three.js se carga desde CDN. El planificador 2D y los cálculos continúan funcionando sin conexión.</span></div></div>
   </div>
-  <p class="small">Mouse sobre espacio vacío: orbitar · rueda: zoom · arrastrar bulto: mover XY · botón “Elevar Z”: mover verticalmente · R: rotar 90° · “Apoyar”: baja la pieza hasta la superficie/otra carga. La cámara se bloquea durante el arrastre.</p>
+  <p class="small">Haz clic en un bulto para ver sus medidas y peso sin saturar la vista · mouse sobre espacio vacío: orbitar · rueda: zoom · arrastrar bulto: mover XY · botón “Elevar Z”: mover verticalmente · R: rotar 90° · “Apoyar”: baja la pieza hasta la superficie/otra carga. La cámara se bloquea durante el arrastre.</p>
 </div>
 
 <div class="card">
 <div class="toolbar">
+<div class="gap" style="padding:10px;border:1px solid #d6e1ec;border-radius:9px;background:#f7fafc"><b>V5.0 · Planificación inteligente</b><div class="grid2 gap"><div><label>Estrategia</label><select id="v5Strategy"><option value="smart">Inteligente combinada</option><option value="balance">Equilibrio de carga</option><option value="sequence">Prioridad de descarga</option></select></div><div><label>Apilamiento</label><select id="v5StackPolicy"><option value="safe">Seguro (validado)</option><option value="off">Desactivado</option></select></div></div><p class="small">A: cerca de puertas (X=L). C: al fondo (X=0). Apilamiento requiere capacidad de soporte declarada (0 kg = NO apilar). La altura libre por sí sola no autoriza el apilamiento. Carga fuera de límites = pendiente. Revisar peso total frente al payload.</p><button onclick="recoverPendingV5()">↩ Recuperar bulto seleccionado</button></div>
 <button class="dark" onclick="autoPack()">Cubicar automático</button>
+ 
 <button onclick="rotateSelected()">↻ Rotar 90°</button>
 <button onclick="centerSelected()">Centrar</button>
 <button onclick="unplaceSelected()">Sacar del contenedor</button>
@@ -173,8 +402,8 @@ table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:7px;borde
 <div><label>Ancho</label><select id="mapW"></select></div>
 <div><label>Alto</label><select id="mapH"></select></div>
 <div><label>Peso</label><select id="mapKg"></select></div>
-<div><label>Unidad dimensiones</label><select id="mapUnit"><option value="1">metros</option><option value="0.01">centímetros</option><option value="0.001">milímetros</option></select></div>
-<div><label>Unidad peso</label><select id="mapWeightUnit"><option value="1">kg</option><option value="1000">toneladas</option></select></div>
+<div><label>Unidad dimensiones</label><select id="mapUnit"><option value="0.01" selected>centímetros (cm)</option><option value="1">metros (m)</option><option value="0.001">milímetros (mm)</option><option value="0.0254">pulgadas (in)</option><option value="0.3048">pies (ft)</option></select></div>
+<div><label>Unidad peso</label><select id="mapWeightUnit"><option value="1" selected>kg</option><option value="1000">toneladas</option><option value="0.001">gramos</option><option value="0.45359237">libras</option></select></div>
 </div>
 <div id="importPreview" class="preview"></div>
 <div class="grid2 gap"><button onclick="closeMap()">Cancelar</button><button class="primary" onclick="confirmImport()">Importar filas</button></div>
@@ -183,15 +412,30 @@ table{width:100%;border-collapse:collapse;font-size:12px}th,td{padding:7px;borde
 <script>
 const presets={
 "Personalizado":{l:13,w:3,h:3,p:30000,t:0,kind:"custom"},
+"Plataforma 13 m · tractocamión T3S3 (referencial)":{l:13,w:2.50,h:4.50,p:30000,t:16000,kind:"open"},
 "Hapag-Lloyd 20' DV":{l:5.900,w:2.352,h:2.395,p:28130,t:2350,kind:"container"},
 "Hapag-Lloyd 40' HC":{l:12.032,w:2.350,h:2.700,p:28600,t:3900,kind:"container"},
 "Hapag-Lloyd 20' Open Top":{l:5.895,w:2.350,h:2.340,p:30050,t:2450,kind:"container"},
 "Hapag-Lloyd 40' Open Top":{l:12.029,w:2.350,h:2.344,p:28450,t:4050,kind:"container"},
 "Hapag-Lloyd 20' Flat Rack":{l:5.638,w:2.438,h:2.233,p:42100,t:2900,kind:"open"},
 "Hapag-Lloyd 40' Flat Rack HC":{l:11.652,w:2.347,h:2.265,p:49100,t:5900,kind:"open"},
+"Furgón ref. 01 · 1.5 t":{l:5.1,w:1.9,h:3.1,p:1500,t:0,kind:"rigid",reference:true},
+"Furgón ref. 02 · 1.5 t":{l:5.2,w:1.9,h:3.2,p:1500,t:0,kind:"rigid",reference:true},
+"Furgón ref. 03 · 1.665 t":{l:3.99,w:1.62,h:1.92,p:1665,t:0,kind:"rigid",reference:true},
+"Furgón ref. 04 · 17 t":{l:13.2,w:2.6,h:4.0,p:17000,t:0,kind:"rigid",reference:true},
+"Furgón ref. 05 · 8.5 t":{l:8.7,w:2.5,h:3.7,p:8500,t:0,kind:"rigid",reference:true},
+"Furgón ref. 06 · 4.7 t":{l:7.5,w:2.3,h:3.5,p:4700,t:0,kind:"rigid",reference:true},
+"Furgón ref. 07 · 4.5 t":{l:7.16,w:2.3,h:3.27,p:4500,t:0,kind:"rigid",reference:true},
+"Furgón ref. 08 · 1.5 t (revisar altura)":{l:2.7,w:1.9,h:5.1,p:1500,t:0,kind:"rigid",reference:true},
+"Furgón ref. 09 · 12.476 t":{l:10.75,w:2.6,h:4.1,p:12476,t:0,kind:"rigid",reference:true},
+"Furgón ref. 10 · 12.476 t":{l:10.6,w:2.6,h:3.9,p:12476,t:0,kind:"rigid",reference:true},
+"Furgón ref. 11 · 5.3 t":{l:6.6,w:2.3,h:3.2,p:5300,t:0,kind:"rigid",reference:true},
+"Furgón ref. 12 · 1.21 t":{l:4.79,w:1.69,h:1.96,p:1210,t:0,kind:"rigid",reference:true},
+"Porter referencial · capacidad pendiente":{l:2.80,w:1.80,h:1.75,p:0,t:0,kind:"rigid",reference:true},
+"Furgón rígido personalizado":{l:5.50,w:2.20,h:2.30,p:3500,t:0,kind:"rigid",reference:true},
 "Furgón 20' / referencia":{l:6.00,w:2.40,h:2.40,p:12000,t:0,kind:"closed"},
 "Furgón 40' / referencia":{l:12.00,w:2.40,h:2.60,p:28000,t:0,kind:"closed"},
-"Cama baja (Lowboy) / referencia":{l:12.00,w:3.00,h:4.50,p:45000,t:15000,kind:"open"},
+"Cama baja (Lowboy) / referencia":{l:8.50,w:3.00,h:4.50,p:45000,t:15000,kind:"open"},
 "Cama cuna / referencia":{l:12.00,w:3.00,h:4.50,p:60000,t:18000,kind:"open"},
 "Plataforma 40' – 100 t":{l:12.192,w:3.00,h:4.50,p:100000,t:18000,kind:"open"},
 "Plataforma 62' – 100 t":{l:18.898,w:3.00,h:4.50,p:100000,t:22000,kind:"open"},
@@ -199,11 +443,31 @@ const presets={
 "Modular hidráulico / configurable":{l:12.00,w:3.00,h:5.00,p:100000,t:25000,kind:"modular"}
 };
 let items=[], selected=null, drag=null, uid=1;
-const skuColors=['#ff6568','#00ccaa','#ffc1c2','#68002b','#7f8cff','#f4b942','#9b59b6','#2e86de','#58d68d','#e67e22'];
+const skuColors=['#e85b59','#2e86de','#e5a52c','#16a085','#9b59b6','#d35400','#27ae60','#34495e','#c0398b','#6482d4'];
+const v5CodeColors=new Map();
 const $=x=>document.getElementById(x);
-Object.keys(presets).forEach(k=>{let o=document.createElement('option');o.textContent=k;$('preset').appendChild(o)});
-$('preset').onchange=applyPreset; ['cl','cw','ch','payload','tare','pbvlimit','axles','supportFrontX','supportRearX','vehWeight','frontLimit','rearLimit'].forEach(x=>$(x).oninput=refresh);
+const v5FurgonKeys=Object.keys(presets).filter(k=>k.startsWith('Furgón ref.')||k.startsWith('Porter referencial')||k==='Furgón rígido personalizado'||k.startsWith('Furgón 20')||k.startsWith('Furgón 40'));
+const v5GeneralKeys=Object.keys(presets).filter(k=>!v5FurgonKeys.includes(k));
+v5GeneralKeys.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=k;$('preset').appendChild(o)});
+v5FurgonKeys.forEach(k=>{const o=document.createElement('option');o.value=k;o.textContent=k;$('furgonPreset').appendChild(o);const hidden=document.createElement('option');hidden.value=k;hidden.textContent=k;hidden.hidden=true;$('preset').appendChild(hidden)});
+function v5SyncVehicleCategory(){
+ const isF=v5FurgonKeys.includes($('preset').value);
+ $('vehicleCategory').value=isF?'furgon':'general';
+ $('vehicleFurgonRow').hidden=!isF;
+ $('vehicleGeneralRow').hidden=isF;
+ if(isF)$('furgonPreset').value=$('preset').value;
+}
+$('vehicleCategory').addEventListener('change',()=>{
+ const f=$('vehicleCategory').value==='furgon';
+ $('vehicleFurgonRow').hidden=!f;$('vehicleGeneralRow').hidden=f;
+ $('preset').value=f?$('furgonPreset').value:v5GeneralKeys[0];
+ applyPreset();
+});
+$('furgonPreset').addEventListener('change',()=>{$('preset').value=$('furgonPreset').value;applyPreset()});
+
+$('preset').onchange=applyPreset; ['cl','cw','ch','payload','tare','pbvlimit','axles','supportFrontX','supportRearX','vehWeight','frontLimit','rearLimit','deckHeight','roadLimit','supportHeightRoad','accessoryHeight'].forEach(x=>$(x).oninput=refresh);$('clearance').onchange=refresh;
 function applyPreset(){
+ v5SyncVehicleCategory();
  let p=presets[$('preset').value];$('cl').value=p.l;$('cw').value=p.w;$('ch').value=p.h;$('payload').value=p.p;$('tare').value=p.t;$('pbvlimit').value=p.p+p.t;
  let L=p.l;
  $('supportFrontX').value=(Math.min(1.20,L*.15)).toFixed(2);
@@ -211,20 +475,26 @@ function applyPreset(){
  $('vehWeight').value=p.t||18000;
  $('frontLimit').value=Math.round((p.p+p.t)*.38)||18000;
  $('rearLimit').value=Math.round((p.p+p.t)*.62)||30000;
- $('equipnote').textContent=p.kind==="modular"?"Modular configurable: ajusta líneas de ejes, geometría, tara, payload, PBV y apoyos/ejes según la ficha técnica real.":"Parámetros editables de planificación. Para cálculo de ejes, reemplaza las posiciones y límites por los datos reales del tracto/remolque.";
+ $('deckHeight').value=/Cama cuna/.test($('preset').value)?'0.65':/Cama baja/.test($('preset').value)?'0.85':p.kind==='open'?'1.35':'1.20';
+  if(p.kind==='rigid'){
+   $('equipnote').textContent="FURGÓN / PORTER REFERENCIAL: dimensiones reportadas por proveedor, aún sin confirmar si son interiores. Confirmar medidas útiles, puerta, piso, tara y capacidad documental. El modelo 3D de carrocería y ejes es ilustrativo. No usar como certificación técnica.";
+   if(p.p===0) $('equipnote').textContent+=" PORTER: carga útil pendiente; ingresa capacidad verificada antes de cubicar.";
+   refresh();return;
+  }
+  $('equipnote').textContent=p.kind==="modular"?"Modular configurable: ajusta líneas de ejes, geometría, tara, payload, PBV y apoyos/ejes según la ficha técnica real.":(/Cama baja/.test($('preset').value)?"CAMA BAJA 3 EJES / CUELLO FIJO: Largo y ancho son del POZO ÚTIL, no del conjunto completo. Sobreancho lateral de hasta 5.50 m solo para evaluación geométrica condicionada; NO certifica estabilidad ni apoyo. El cuello y puente posterior no admiten carga en esta versión. Alturas, tara, capacidades y ejes son ilustrativos; validar ficha técnica del proveedor.":"Parámetros editables de planificación. Para cálculo de ejes, reemplaza las posiciones y límites por los datos reales del tracto/remolque.");
  refresh()
 }
 applyPreset();
 
 function addCargo(){
- let q=+$('qty').value,L=+$('l').value,W=+$('w').value,H=+$('h').value;
- if(!q||!L||!W||!H)return alert('Completa cantidad y dimensiones.');
- let sku=$('sku').value.trim(), autoColor=sku?skuColors[Math.abs([...sku].reduce((s,c)=>s+c.charCodeAt(0),0))%skuColors.length]:$('color').value; for(let i=0;i<q;i++)items.push({id:uid++,name:$('name').value||'Bulto',sku:sku,l:L,w:W,h:H,kg:+$('kg').value||0,color:autoColor,rotate:$('rotate').value==='1',stack:$('stack').value==='1',x:null,y:null,z:0});
+ let q=+$('qty').value,L=+$('l').value*(+$('v5CargoUnitL').value),W=+$('w').value*(+$('v5CargoUnitW').value),H=+$('h').value*(+$('v5CargoUnitH').value);let palletMode=$('v5PalletMode').value;let palletH=palletMode==='extra'?Math.max(0,+$('v5PalletH').value||0):0;let palletKg=palletMode==='extra'?Math.max(0,+$('v5PalletKg').value||0):0;H+=palletH;
+ if(!Number.isInteger(q)||q<1||q>10000||![L,W,H].every(v=>Number.isFinite(v)&&v>0)||!Number.isFinite(+$('kg').value)||+$('kg').value<=0)return alert('Ingresa cantidad entera, largo, ancho, alto y peso unitario positivos antes de agregar mercancía.');
+ let sku=$('sku').value.trim(), codeKey=sku||('SIN CÓDIGO · '+$('name').value.trim());if(!v5CodeColors.has(codeKey))v5CodeColors.set(codeKey,skuColors[v5CodeColors.size%skuColors.length]);let chosenColor=$('color').value;let autoColor=chosenColor==='auto'?v5CodeColors.get(codeKey):chosenColor;v5CodeColors.set(codeKey,autoColor); for(let i=0;i<q;i++)items.push({id:uid++,name:$('name').value||'Bulto',sku:sku,l:L,w:W,h:H,kg:(+$('kg').value||0)*(+$('v5CargoWeightUnit').value)+palletKg,palletMode,palletH,palletKg,color:autoColor,rotate:$('rotate').value==='1',stack:$('stack').value==='1',visualType:$('visualType').value,priority:$('v5Priority').value,maxTopLoad:Math.max(0,+$('v5TopLoad').value||0),clearance:Math.max(0,+$('clearance').value||0),x:null,y:null,z:0});
  selected=items.at(-1)?.id; refresh();
 }
 function getSel(){return items.find(x=>x.id===selected)}
 function unplaceSelected(){let s=getSel();if(s){s.x=s.y=null;refresh()}}
-function deleteSelected(){if(selected==null)return;items=items.filter(x=>x.id!==selected);selected=null;refresh()}
+function deleteSelected(){if(selected==null)return;items=items.filter(x=>x.id!==selected);selected=null;v5SyncVehicleCategory();refresh()}
 function centerSelected(){let s=getSel();if(!s)return;let CL=+$('cl').value,CW=+$('cw').value;s.x=(CL-s.l)/2;s.y=(CW-s.w)/2;refresh()}
 function rotateSelected(){let s=getSel();if(!s||!s.rotate)return;[s.l,s.w]=[s.w,s.l];if(s.x!=null){let cx=s.x+s.w/2,cy=s.y+s.l/2;s.x=s.x;s.y=s.y}refresh()}
 function clearAll(){if(confirm('¿Eliminar toda la mercadería?')){items=[];selected=null;uid=1;refresh()}}
@@ -233,37 +503,96 @@ function overlaps(a,b){
  if(a.x==null||b.x==null)return false;
  return a.x < b.x+b.l-1e-6 && a.x+a.l > b.x+1e-6 && a.y < b.y+b.w-1e-6 && a.y+a.w > b.y+1e-6;
 }
-function collision(a){return a.x!=null&&items.some(b=>b.id!==a.id&&overlaps(a,b))}
+function collision(a){return a.x!=null&&items.some(b=>b.id!==a.id&&overlap1(a.x,a.x+a.l,b.x,b.x+b.l)&&overlap1(a.y,a.y+a.w,b.y,b.y+b.w)&&overlap1(a.z||0,(a.z||0)+a.h,b.z||0,(b.z||0)+b.h))}
+function clearanceConflict(a){if(a.x==null)return false;return items.some(b=>{if(b.id===a.id||b.x==null)return false;const gap=Math.max(0,a.clearance??(+$('clearance').value||0),b.clearance??(+$('clearance').value||0));return overlap1(a.x-gap/2,a.x+a.l+gap/2,b.x-gap/2,b.x+b.l+gap/2)&&overlap1(a.y-gap/2,a.y+a.w+gap/2,b.y-gap/2,b.y+b.w+gap/2)&&overlap1(a.z||0,(a.z||0)+a.h,b.z||0,(b.z||0)+b.h)})}
+function unsupported(a){if(a.x==null||(a.z||0)<=.005)return false;let z=a.z||0;return !items.some(b=>b.id!==a.id&&b.x!=null&&b.stack&&(b.maxTopLoad||0)>=a.kg&&Math.abs((b.z||0)+b.h-z)<.015&&a.x>=b.x-.005&&a.y>=b.y-.005&&a.x+a.l<=b.x+b.l+.005&&a.y+a.w<=b.y+b.w+.005)}
+function overlap1(a0,a1,b0,b1){return a0<b1-1e-5&&a1>b0+1e-5}
 function oog(a){
  if(a.x==null)return null;
  let CL=+$('cl').value,CW=+$('cw').value,CH=+$('ch').value;
  let left=Math.max(0,-a.y), right=Math.max(0,a.y+a.w-CW);
  let front=Math.max(0,-a.x), rear=Math.max(0,a.x+a.l-CL);
- let high=Math.max(0,a.h-CH);
+ let high=Math.max(0,(a.z||0)+a.h-CH);
  return {left,right,front,rear,high,any:left>0||right>0||front>0||rear>0||high>0};
 }
-function invalid(a){let o=oog(a);return collision(a)||(o&&o.any)}
-function autoPack(){
- let CL=+$('cl').value,CW=+$('cw').value;
- items.forEach(x=>{x.x=x.y=null;x.z=0});
- let sorted=[...items].sort((a,b)=>b.l*b.w-a.l*a.w), step=.02;
- for(let a of sorted){
-   if(a.l>CL||a.w>CW){
-     let normalOverflow=Math.max(0,a.l-CL)+Math.max(0,a.w-CW);
-     let rotatedOverflow=a.rotate?Math.max(0,a.w-CL)+Math.max(0,a.l-CW):Infinity;
-     if(rotatedOverflow<normalOverflow)[a.l,a.w]=[a.w,a.l];
-     a.x=(CL-a.l)/2;a.y=(CW-a.w)/2;continue;
-   }
-   let opts=[[a.l,a.w,false]];if(a.rotate&&a.l!==a.w)opts.push([a.w,a.l,true]);let found=null;
-   outer:for(let op of opts){let [L,W,rot]=op;for(let y=0;y+W<=CW+1e-9;y+=step){for(let x=0;x+L<=CL+1e-9;x+=step){
-     let test={...a,l:L,w:W,x,y};if(!sorted.some(b=>b.id!==a.id&&b.x!=null&&overlaps(test,b))){found={x,y,L,W,rot};break outer}
-   }}}
-   if(found){if(found.rot)[a.l,a.w]=[a.w,a.l];a.x=found.x;a.y=found.y}
-   else {a.x=(CL-a.l)/2;a.y=(CW-a.w)/2}
- }
- refresh();
+function isOpenOversizeEquipment(){return /Cama baja|Cama cuna|Modular/.test($('preset').value)}
+function overwidthCondition(a){
+ if(!isOpenOversizeEquipment()||a.x==null)return false;
+ const o=oog(a);return !!(o&&(o.left>1e-5||o.right>1e-5)&&o.front<1e-5&&o.rear<1e-5&&o.high<1e-5&&a.w<=5.5+1e-5);
 }
-function stats(){
+function invalid(a){let o=oog(a);return collision(a)||clearanceConflict(a)||unsupported(a)||(o&&o.any&&!overwidthCondition(a))}
+
+// Centrado geométrico posterior a la cubicación; conserva posiciones relativas y holguras.
+// NO equivale a balance de ejes ni a validación de estabilidad.
+function centerPackedGroup(group,L,W){
+ const placed=group.filter(a=>a.x!=null&&a.y!=null&&a.x>=0&&a.y>=0&&a.x+a.l<=L+1e-5&&a.y+a.w<=W+1e-5);
+ if(!placed.length)return;
+ const minX=Math.min(...placed.map(a=>a.x)),maxX=Math.max(...placed.map(a=>a.x+a.l));
+ const minY=Math.min(...placed.map(a=>a.y)),maxY=Math.max(...placed.map(a=>a.y+a.w));
+ const dx=(L-(maxX-minX))/2-minX,dy=(W-(maxY-minY))/2-minY;
+ for(const a of placed){a.x=Math.round((a.x+dx)*10000)/10000;a.y=Math.round((a.y+dy)*10000)/10000;}
+}
+function v5Priority(a){return ({C:0,B:1,A:2})[a.priority||'B']??1}
+function v5Support(a,placed){
+ if((a.z||0)<.001)return true;
+ const below=placed.filter(b=>b.id!==a.id&&b.stack&&Math.abs((b.z||0)+b.h-a.z)<.01&&a.x>=b.x-.001&&a.y>=b.y-.001&&a.x+a.l<=b.x+b.l+.001&&a.y+a.w<=b.y+b.w+.001);
+ if(!below.length)return false;
+ return below.some(b=>{let above=placed.filter(c=>c.id!==a.id&&c.id!==b.id&&Math.abs((c.z||0)-(b.z+b.h))<.01&&overlap1(c.x,c.x+c.l,b.x,b.x+b.l)&&overlap1(c.y,c.y+c.w,b.y,b.y+b.w)).reduce((t,c)=>t+c.kg,0);return (b.maxTopLoad||0)>=above+a.kg-1e-6});
+}
+function autoPack(){
+ const CL=+$('cl').value,CW=+$('cw').value,CH=+$('ch').value,gap=Math.max(0,+$('clearance').value||0),EPS=1e-6;
+ if(!(CL>0&&CW>0&&CH>0))return alert('Configura dimensiones útiles válidas.');
+ items.forEach(a=>{a.x=null;a.y=null;a.z=0});
+ const strategy=$('v5Strategy')?.value||'smart',stackOn=$('v5StackPolicy')?.value!=='off';
+ const sorted=[...items].sort((a,b)=>v5Priority(a)-v5Priority(b)||b.kg-a.kg||b.l*b.w-a.l*a.w);
+ const placed=[];let packedKg=0;const maxPayload=+$('payload').value||($('preset').value.includes('Porter referencial')?0:Infinity);
+ for(const a of sorted){
+   const orientations=[{l:a.l,w:a.w,rot:false}];if(a.rotate&&Math.abs(a.l-a.w)>EPS)orientations.push({l:a.w,w:a.l,rot:true});
+   let best=null;
+   for(const o of orientations){
+     if(o.l>CL+EPS||a.h>CH+EPS||packedKg+a.kg>maxPayload+EPS)continue;
+     const oversize=isOpenOversizeEquipment()&&o.w>CW+EPS&&o.w<=5.5+EPS;
+     if(o.w>CW+EPS&&!oversize)continue;
+     const xs=[0,Math.max(0,CL-o.l),...placed.flatMap(b=>{const g=Math.max(gap,a.clearance??gap,b.clearance??gap);return [b.x+b.l+g,b.x-o.l-g,b.x]})];
+     const ys=[...(oversize?[(CW-o.w)/2]:[0]),...placed.flatMap(b=>{const g=Math.max(gap,a.clearance??gap,b.clearance??gap);return [b.y+b.w+g,b.y-o.w-g,b.y]})];
+     const zs=[0,...(stackOn?placed.filter(b=>b.stack&&(b.maxTopLoad||0)>=a.kg).map(b=>b.z+b.h):[])];
+     for(const x0 of xs)for(const y0 of ys)for(const z0 of zs){
+       const x=Math.round(x0*10000)/10000,y=Math.round(y0*10000)/10000,z=Math.round(z0*10000)/10000;
+       if(x<-EPS||x+o.l>CL+EPS||z+a.h>CH+EPS)continue;
+       if(oversize){if(Math.abs(y-(CW-o.w)/2)>.0001)continue;}else if(y<-EPS||y+o.w>CW+EPS)continue;
+       const candidate={...a,x,y,z,l:o.l,w:o.w};
+       const conflict=placed.some(b=>{const g=Math.max(gap,a.clearance??gap,b.clearance??gap);return overlap1(x-g/2,x+o.l+g/2,b.x-g/2,b.x+b.l+g/2)&&overlap1(y-g/2,y+o.w+g/2,b.y-g/2,b.y+b.w+g/2)&&overlap1(z,z+a.h,b.z,b.z+b.h)});
+       if(conflict||!v5Support(candidate,placed))continue;
+       // Priorities: C toward front/fondo, A toward rear doors; balance is secondary.
+       const center=x+o.l/2, target=(v5Priority(a)===0?.16:v5Priority(a)===2?.84:.5)*CL;
+       const priorityCost=Math.abs(center-target);
+       const balanceCost=Math.abs(center-CL/2);
+       const score=(strategy==='balance'?balanceCost*3:strategy==='sequence'?priorityCost*3:priorityCost*2+balanceCost*.35)+z*.6+y*.03+(o.rot?.0001:0);
+       if(!best||score<best.score)best={x,y,z,...o,score};
+     }
+   }
+   if(best){if(best.rot)[a.l,a.w]=[a.w,a.l];a.x=best.x;a.y=best.y;a.z=best.z;placed.push(a);packedKg+=a.kg}
+ }
+ // Deliberately no recentering: preserve A/B/C access from rear doors.
+ selected=placed[0]?.id||null;refresh();
+}
+function recoverPendingV5(){let a=getSel();if(!a)return alert('Selecciona un bulto.');
+ if(a.v5Last&&a.v5Last.x>=0){Object.assign(a,{x:a.v5Last.x,y:a.v5Last.y,z:a.v5Last.z});if(!invalid(a)){refresh();return}}
+ a.x=null;a.y=null;a.z=0;refresh();alert('Bulto mantenido como pendiente: sin posición anterior válida. Ejecuta Cubicar automático para reubicarlo.');
+}
+
+function isFixedLowboy(){return /Cama baja/.test($('preset').value)}
+function wellValidation(){
+ const low=isFixedLowboy(),L=+$('cl').value,W=+$('cw').value;
+ const placed=items.filter(a=>a.x!=null);
+ const bad=low?placed.filter(a=>a.x<-.0001||a.x+a.l>L+.0001||(a.z||0)>.0001||((a.y<-.0001||a.y+a.w>W+.0001)&&!overwidthCondition(a))):[];
+ const wide=placed.filter(overwidthCondition);
+ const unplaced=items.filter(a=>a.x==null).length;
+ const el=$('wellAlert');
+ el.className='alertbox'+(bad.length||unplaced||wide.length?' warn':'');
+ el.innerHTML=low?`<b>Pozo útil — cama baja de 3 ejes / cuello fijo</b><span>${L.toFixed(2)} × ${W.toFixed(2)} m · Piso a ${(+$('deckHeight').value||0).toFixed(2)} m del pavimento · ${placed.length} bulto(s) ubicados · ${bad.length} fuera de longitud/altura permitidas · ${wide.length} sobreancho condicionado · ${unplaced} sin ubicar. El cuello y el puente posterior quedan excluidos del área cargable. El sobreancho exige verificar apoyo, CoG lateral, estabilidad, amarre, permisos y ruta. ${bad.length?'REVISAR POSICIONES.':'Evaluación geométrica preliminar; NO es autorización de transporte.'}</span>`:`<b>Zona de carga — ${unplaced?'CARGA PENDIENTE':'distribución preliminar'}</b><span>${placed.length}/${items.length} bulto(s) ubicados dentro de la zona útil · ${unplaced} sin ubicar. ${unplaced?'Los bultos pendientes NO se muestran dentro del vehículo: evaluar otra unidad o nueva distribución.':'Verificar peso, separación y condiciones operativas.'}</span>`;
+}
+function stats(){wellValidation();
  let V=items.reduce((s,a)=>s+a.l*a.w*a.h,0),kg=items.reduce((s,a)=>s+a.kg,0),CV=(+$('cl').value)*(+$('cw').value)*(+$('ch').value),n=items.filter(a=>a.x!=null).length;
  let payload=+$('payload').value,tare=+$('tare').value,pbv=tare+kg,pbvlim=+$('pbvlimit').value||tare+payload;
  $('vol').textContent=V.toFixed(2);$('util').textContent=(CV?100*V/CV:0).toFixed(1)+'%';$('weight').textContent=Math.round(kg).toLocaleString();$('placed').textContent=n+'/'+items.length;
@@ -276,10 +605,32 @@ function stats(){
  wa.innerHTML=`<b>PBV / Payload</b><span>Carga ${kg.toLocaleString()} kg · Tara ${tare.toLocaleString()} kg · PBV calc. ${pbv.toLocaleString()} kg · Límite ${pbvlim.toLocaleString()} kg${overweight?` · SOBREPESO PAYLOAD +${(kg-payload).toLocaleString()} kg`:''}${overpbv?` · EXCESO PBV +${(pbv-pbvlim).toLocaleString()} kg`:''}</span>`;
  let oa=$('oogAlert');oa.className='alertbox'+(oogs.length?' warn':'');
  oa.innerHTML=`<b>OOG / Sobredimensión</b><span>${oogs.length?`${oogs.length} bulto(s) OOG · lateral máx. ${maxLat.toFixed(2)} m/lado · longitudinal máx. ${maxLong.toFixed(2)} m · alto +${maxHigh.toFixed(2)} m`:'Sin sobredimensión detectada en bultos ubicados.'}</span>`;
- let bad=items.some(invalid)||overweight||overpbv;$('status').textContent=bad?'REVISAR':(n===items.length&&items.length?'OK':'LISTO');
+ let deck=+$('deckHeight').value||0,road=+$('roadLimit').value||0;
+  let maxTop=Math.max(0,...items.filter(a=>a.x!=null).map(a=>(a.z||0)+a.h));
+  let supportRoad=+$('supportHeightRoad').value||0,accessoryRoad=+$('accessoryHeight').value||0;
+  let roadHeight=deck+supportRoad+maxTop+accessoryRoad,roadBad=road>0&&roadHeight>road+1e-6;
+  let ra=$('roadAlert');ra.className='alertbox'+(roadBad?' warn':'');ra.innerHTML=`<b>Altura total de transporte</b><span>Piso ${deck.toFixed(2)} + apoyos ${supportRoad.toFixed(2)} + carga ${maxTop.toFixed(2)} + accesorios ${accessoryRoad.toFixed(2)} m = <b>${roadHeight.toFixed(2)} m</b> · Referencia ${road.toFixed(2)} m ${roadBad?'· EXCEDE REFERENCIA':''}</span>`;
+  let unsupportedItems=items.filter(unsupported),spacingItems=items.filter(clearanceConflict);
+  let sa=$('supportAlert');sa.className='alertbox'+(unsupportedItems.length||spacingItems.length?' warn':'');sa.innerHTML=`<b>Estiba y soportes</b><span>${unsupportedItems.length} carga(s) elevada(s) sin apoyo completo validado · ${spacingItems.length} carga(s) sin separación requerida. La capacidad estructural de apoyos y trincaje requiere verificación de ingeniería.</span>`;
+  let bad=n<items.length||items.some(invalid)||items.some(overwidthCondition)||overweight||overpbv||roadBad;$('status').textContent=bad?'REVISAR':(n===items.length&&items.length?'OK':'LISTO');
+}
+function v5RenderGroups(){
+ const el=$('v5GroupList');if(!el)return;
+ const groups=new Map();
+ for(const a of items){const key=(a.sku||'SIN CÓDIGO')+'|'+a.l+'|'+a.w+'|'+a.h+'|'+a.kg+'|'+(a.priority||'B');if(!groups.has(key))groups.set(key,[]);groups.get(key).push(a)}
+ $('v5GroupCount').textContent=groups.size+' tipo(s) · '+items.length+' bulto(s)';
+ if(!groups.size){el.textContent='Todavía no hay mercancías.';return}
+ const total=items.reduce((n,a)=>n+a.kg,0),payload=+$('payload').value||0;
+ let html='<div style="margin-bottom:8px"><b>Peso total: '+total.toLocaleString('es-PE')+' kg</b> · Capacidad configurada: '+payload.toLocaleString('es-PE')+' kg '+(payload&&total>payload?'<strong style="color:#b91c1c">⚠ EXCEDE PAYLOAD</strong>':'')+'</div>';
+ for(const arr of groups.values()){
+  const a=arr[0],placed=arr.filter(x=>x.x!=null&&!invalid(x)).length,upper=arr.filter(x=>(x.z||0)>.01&&x.x!=null).length;
+  const code=String(a.sku||'Sin código').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+  html+='<div style="border:1px solid #dce5ed;border-radius:8px;padding:9px;margin:6px 0;background:#fff"><div style="display:flex;align-items:center;gap:7px"><span style="background:'+a.color+';width:16px;height:16px;border-radius:4px;border:1px solid #bbb;flex-shrink:0"></span><b>Código '+code+'</b><span style="margin-left:auto">'+arr.length+' bultos</span></div><div>'+a.l.toFixed(2)+' × '+a.w.toFixed(2)+' × '+a.h.toFixed(2)+' m · '+a.kg.toLocaleString('es-PE')+' kg/c.u. · '+(arr.length*a.kg).toLocaleString('es-PE')+' kg total</div><div>Prioridad '+(a.priority||'B')+' · Ubicados '+placed+'/'+arr.length+' · En segundo nivel o superior '+upper+' · Soporte encima '+(a.maxTopLoad||0)+' kg</div><button type="button" style="margin-top:5px" onclick="selected='+a.id+';refresh()">Seleccionar primer bulto</button></div>';
+ }
+ el.innerHTML=html;
 }
 function renderRows(){
- $('rows').innerHTML=items.map(a=>`<tr class="${a.id===selected?'selectedrow':''}" onclick="selected=${a.id};refresh()"><td>${a.id}</td><td><span style="display:inline-block;width:9px;height:9px;background:${a.color};margin-right:5px"></span>${a.name}</td><td>${a.l.toFixed(3)} × ${a.w.toFixed(3)} × ${a.h.toFixed(3)}</td><td>${a.kg.toLocaleString()} kg</td><td>${a.x==null?'—':a.x.toFixed(2)+' / '+a.y.toFixed(2)+' / '+(a.z||0).toFixed(2)}</td><td><span class="badge">${a.x==null?'Sin ubicar':(oog(a)&&oog(a).any)?'OOG':collision(a)?'Colisión':'Ubicado'}</span></td><td><button onclick="event.stopPropagation();selected=${a.id};deleteSelected()">×</button></td></tr>`).join('');
+ $('rows').innerHTML=items.map(a=>`<tr class="${a.id===selected?'selectedrow':''}" onclick="selected=${a.id};refresh()"><td>${a.id}</td><td><span style="display:inline-block;width:9px;height:9px;background:${a.color};margin-right:5px"></span>${a.name}</td><td>${a.l.toFixed(3)} × ${a.w.toFixed(3)} × ${a.h.toFixed(3)}</td><td>${a.kg.toLocaleString()} kg</td><td>${a.x==null?'—':a.x.toFixed(2)+' / '+a.y.toFixed(2)+' / '+(a.z||0).toFixed(2)}</td><td><span class="badge">${a.x==null?'Sin ubicar':(oog(a)&&oog(a).any)?(overwidthCondition(a)?'SOBREANCHO / REVISAR':'OOG'):collision(a)?'Colisión':'Ubicado'}</span></td><td><button onclick="event.stopPropagation();selected=${a.id};deleteSelected()">×</button></td></tr>`).join('');
 }
 function metrics(canvas){
  let CL=+$('cl').value,CW=+$('cw').value,pad=70;
@@ -308,10 +659,10 @@ function draw(){
 }
 function drawSide(){
  let c=$('side'),ctx=c.getContext('2d'),CL=+$('cl').value,CH=+$('ch').value,pad=55;
- let extF=0,extB=0,maxH=CH;items.filter(a=>a.x!=null).forEach(a=>{extF=Math.max(extF,-a.x);extB=Math.max(extB,a.x+a.l-CL);maxH=Math.max(maxH,a.h)});
+ let extF=0,extB=0,maxH=CH;items.filter(a=>a.x!=null).forEach(a=>{extF=Math.max(extF,-a.x);extB=Math.max(extB,a.x+a.l-CL);maxH=Math.max(maxH,(a.z||0)+a.h)});
  let s=Math.min((c.width-pad*2)/(CL+Math.max(0,extF)+Math.max(0,extB)),(c.height-pad*2)/maxH),ox=pad+Math.max(0,extF)*s,base=c.height-pad;
  ctx.clearRect(0,0,c.width,c.height);ctx.fillStyle='#fff';ctx.fillRect(ox,base-CH*s,CL*s,CH*s);ctx.strokeStyle='#000';ctx.lineWidth=3;ctx.strokeRect(ox,base-CH*s,CL*s,CH*s);
- items.filter(a=>a.x!=null).forEach(a=>{let o=oog(a),x=ox+a.x*s,y=base-a.h*s,w=a.l*s,h=a.h*s;ctx.fillStyle=(o&&o.any)?'#ff6568aa':a.color+'aa';ctx.fillRect(x,y,w,h);ctx.strokeStyle=(o&&o.any)?'#b00020':(a.id===selected?'#000':'#fff');ctx.lineWidth=a.id===selected?3:1;ctx.strokeRect(x,y,w,h);if(o&&o.high){ctx.fillStyle='#b00020';ctx.font='bold 11px Arial';ctx.fillText('OH +'+o.high.toFixed(2)+' m',x+4,y+13)}})
+ items.filter(a=>a.x!=null).forEach(a=>{let o=oog(a),x=ox+a.x*s,y=base-((a.z||0)+a.h)*s,w=a.l*s,h=a.h*s;ctx.fillStyle=(o&&o.any)?'#ff6568aa':a.color+'aa';ctx.fillRect(x,y,w,h);ctx.strokeStyle=(o&&o.any)?'#b00020':(a.id===selected?'#000':'#fff');ctx.lineWidth=a.id===selected?3:1;ctx.strokeRect(x,y,w,h);if(o&&o.high){ctx.fillStyle='#b00020';ctx.font='bold 11px Arial';ctx.fillText('OH +'+o.high.toFixed(2)+' m',x+4,y+13)}})
 }
 
 function technicalCalc(){
@@ -322,6 +673,15 @@ function technicalCalc(){
  let a=+$('supportFrontX').value,b=+$('supportRearX').value, span=b-a;
  let rear=span?total*(cgx-a)/span:0, front=total-rear;
  let fl=+$('frontLimit').value||1,rl=+$('rearLimit').value||1;
+ const validSupport=Number.isFinite(a)&&Number.isFinite(b)&&a>=0&&b>a&&b<=CL&&cgx>=a&&cgx<=b;
+ if(!validSupport){
+  $('cgStat').textContent=`${cgx.toFixed(2)} / ${cgy.toFixed(2)} m (geom.)`;
+  $('frontReaction').textContent='No validada';$('rearReaction').textContent='No validada';
+  $('frontBar').style.width='0%';$('rearBar').style.width='0%';
+  $('balanceStat').textContent='REVISAR APOYOS / EJES';$('balanceStat').className='bad';
+  return {cgx,cgy,cgz:0,front:null,rear:null,total};
+ }
+
  $('cgStat').textContent=`${cgx.toFixed(2)} / ${cgy.toFixed(2)} m`;
  $('frontReaction').textContent=`${Math.round(front).toLocaleString()} kg`;
  $('rearReaction').textContent=`${Math.round(rear).toLocaleString()} kg`;
@@ -333,7 +693,7 @@ function technicalCalc(){
  return {cgx,cgy,cgz:placed.length?Math.max(.08,placed.reduce((s,a)=>s+a.kg*((a.z||0)+a.h/2),0)/(cargoKg||1)):.08,front,rear,total};
 }
 
-function refresh(){stats();technicalCalc();renderRows();draw();if(window.refresh3D)window.refresh3D();let s=getSel();if(s){let o=oog(s),msg=`Seleccionado: <b>#${s.id} ${s.name}</b> · ${s.l.toFixed(3)} × ${s.w.toFixed(3)} × ${s.h.toFixed(3)} m`;if(o&&o.any)msg+=` · <span class="bad"><b>OOG</b>: izq ${o.left.toFixed(2)} / der ${o.right.toFixed(2)} / frente ${o.front.toFixed(2)} / posterior ${o.rear.toFixed(2)} / alto +${o.high.toFixed(2)} m</span>`;if(collision(s))msg+=' · <span class="bad"><b>COLISIÓN</b></span>';$('notes').innerHTML=msg}else $('notes').innerHTML='Selecciona un bulto para editar su posición.' }
+function refresh(){stats();technicalCalc();renderRows();v5RenderGroups();draw();if(window.refresh3D)window.refresh3D();let s=getSel();if(s){let o=oog(s),msg=`Seleccionado: <b>#${s.id} ${s.name}</b> · ${s.l.toFixed(3)} × ${s.w.toFixed(3)} × ${s.h.toFixed(3)} m`;if(o&&o.any)msg+=` · <span class="bad"><b>OOG</b>: izq ${o.left.toFixed(2)} / der ${o.right.toFixed(2)} / frente ${o.front.toFixed(2)} / posterior ${o.rear.toFixed(2)} / alto +${o.high.toFixed(2)} m</span>`;if(collision(s))msg+=' · <span class="bad"><b>COLISIÓN</b></span>';$('notes').innerHTML=msg}else $('notes').innerHTML='Selecciona un bulto para editar su posición.' }
 
 const canvas=$('top');
 canvas.addEventListener('pointerdown',e=>{
@@ -349,9 +709,9 @@ canvas.addEventListener('pointermove',e=>{
 canvas.addEventListener('pointerup',()=>drag=null);canvas.addEventListener('pointercancel',()=>drag=null);
 document.addEventListener('keydown',e=>{let a=getSel();if(!a||a.x==null)return;let d=e.shiftKey?.1:.02;if(e.key==='ArrowLeft')a.x-=d;else if(e.key==='ArrowRight')a.x+=d;else if(e.key==='ArrowUp')a.y-=d;else if(e.key==='ArrowDown')a.y+=d;else if(e.key.toLowerCase()==='r'){rotateSelected();return}else return;e.preventDefault();a.x=Math.round(a.x*100)/100;a.y=Math.round(a.y*100)/100;refresh()});
 
-function saveProject(){localStorage.setItem('sharfLoadPlanner',JSON.stringify({items,uid,preset:$('preset').value,cl:$('cl').value,cw:$('cw').value,ch:$('ch').value,payload:$('payload').value,tare:$('tare').value,pbvlimit:$('pbvlimit').value,axles:$('axles').value,supportFrontX:$('supportFrontX').value,supportRearX:$('supportRearX').value,vehWeight:$('vehWeight').value,frontLimit:$('frontLimit').value,rearLimit:$('rearLimit').value}));alert('Proyecto guardado en este navegador.')}
-function loadProject(){let d=JSON.parse(localStorage.getItem('sharfLoadPlanner')||'null');if(!d)return alert('No hay proyecto guardado.');items=d.items||[];uid=d.uid||1;$('preset').value=d.preset||'Personalizado';['cl','cw','ch','payload','tare','pbvlimit','axles','supportFrontX','supportRearX','vehWeight','frontLimit','rearLimit'].forEach(k=>{if(d[k]!=null)$(k).value=d[k]});selected=null;refresh()}
-function exportCSV(){let l=['ID,Descripción,Largo m,Ancho m,Alto m,Peso kg,X m,Y m,Estado'];items.forEach(a=>l.push([a.id,`"${a.name.replaceAll('"','""')}"`,a.l,a.w,a.h,a.kg,a.x??'',a.y??'',a.x==null?'Sin ubicar':(oog(a)&&oog(a).any)?'OOG':collision(a)?'Colisión':'Ubicado'].join(',')));let A=document.createElement('a');A.href=URL.createObjectURL(new Blob([l.join('\n')],{type:'text/csv'}));A.download='Sharf_Load_Planner.csv';A.click()}
+function saveProject(){localStorage.setItem('sharfLoadPlanner',JSON.stringify({items,uid,preset:$('preset').value,cl:$('cl').value,cw:$('cw').value,ch:$('ch').value,payload:$('payload').value,tare:$('tare').value,pbvlimit:$('pbvlimit').value,axles:$('axles').value,supportFrontX:$('supportFrontX').value,supportRearX:$('supportRearX').value,vehWeight:$('vehWeight').value,frontLimit:$('frontLimit').value,rearLimit:$('rearLimit').value,deckHeight:$('deckHeight').value,roadLimit:$('roadLimit').value,supportHeightRoad:$('supportHeightRoad').value,accessoryHeight:$('accessoryHeight').value,clearance:$('clearance').value}));alert('Proyecto guardado en este navegador.')}
+function loadProject(){let d=JSON.parse(localStorage.getItem('sharfLoadPlanner')||'null');if(!d)return alert('No hay proyecto guardado.');items=d.items||[];uid=d.uid||1;$('preset').value=d.preset||'Personalizado';['cl','cw','ch','payload','tare','pbvlimit','axles','supportFrontX','supportRearX','vehWeight','frontLimit','rearLimit','deckHeight','roadLimit','supportHeightRoad','accessoryHeight','clearance'].forEach(k=>{if(d[k]!=null)$(k).value=d[k]});selected=null;refresh()}
+function exportCSV(){let l=['ID,Descripción,Largo m,Ancho m,Alto m,Peso kg,X m,Y m,Estado'];items.forEach(a=>l.push([a.id,`"${a.name.replaceAll('"','""')}"`,a.l,a.w,a.h,a.kg,a.x??'',a.y??'',a.x==null?'Sin ubicar':(oog(a)&&oog(a).any)?(overwidthCondition(a)?'SOBREANCHO / REVISAR':'OOG'):collision(a)?'Colisión':'Ubicado'].join(',')));let A=document.createElement('a');A.href=URL.createObjectURL(new Blob([l.join('\n')],{type:'text/csv'}));A.download='Sharf_Load_Planner.csv';A.click()}
 
 let importRows=[], importHeaders=[];
 const norm=s=>String(s??'').toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]/g,'');
@@ -396,9 +756,181 @@ function confirmImport(){
  let f={desc:$('mapDesc').value,qty:$('mapQty').value,l:$('mapL').value,w:$('mapW').value,h:$('mapH').value,kg:$('mapKg').value},u=+$('mapUnit').value,wu=+$('mapWeightUnit').value;
  if(!f.l||!f.w||!f.h)return alert('Mapea Largo, Ancho y Alto.');
  let added=0;
- importRows.forEach(r=>{let L=num(r[f.l])*u,W=num(r[f.w])*u,H=num(r[f.h])*u,Q=Math.max(1,Math.round(num(r[f.qty])||1)),KG=num(r[f.kg])*wu;if(!(L>0&&W>0&&H>0))return;for(let i=0;i<Q;i++){items.push({id:uid++,name:f.desc?String(r[f.desc]||'Bulto'):'Bulto',sku:'',l:L,w:W,h:H,kg:KG,color:'#ff6568',rotate:true,stack:true,x:null,y:null,z:0});added++}});
+ importRows.forEach(r=>{let L=num(r[f.l])*u,W=num(r[f.w])*u,H=num(r[f.h])*u,Q=Math.max(1,Math.round(num(r[f.qty])||1)),KG=num(r[f.kg])*wu;if(!(L>0&&W>0&&H>0))return;for(let i=0;i<Q;i++){items.push({id:uid++,name:f.desc?String(r[f.desc]||'Bulto'):'Bulto',sku:'',l:L,w:W,h:H,kg:KG,color:skuColors[(added+Math.floor(i/Math.max(1,Q)))%skuColors.length],rotate:true,stack:true,priority:'B',maxTopLoad:0,visualType:'box',x:null,y:null,z:0});added++}});
  closeMap();selected=items.at(-1)?.id||null;refresh();alert(`${added} bulto(s) importados correctamente.`);
 }
+
+
+// V5.0: módulo independiente de planificación de flota. No altera la cubicación existente.
+let fleetLast=[];
+let fleetBackup=null;
+const fleetEscape=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fleetProfiles=()=>[
+ {key:'flat',name:'Plataforma 13 m',L:13,W:2.50,deck:1.40,kg:+$('fleetFlatKg').value,kind:'flat',axles:'T3S3 referencial'},
+ {key:'low',name:'Cama baja · 3 ejes / cuello fijo',L:8.50,W:3.00,deck:.85,kg:+$('fleetLowKg').value,kind:'low',axles:'T3S3 referencial; solo pozo útil'},
+ {key:'cradle',name:'Cama cuna · referencial',L:8.00,W:3.00,deck:.65,kg:+$('fleetCradleKg').value,kind:'cradle',axles:'Ejes según ficha técnica'},
+ {key:'modular',name:'Modular multieje · configuración larga demostrativa',L:18,W:3.20,deck:1.15,kg:60000,kind:'modular',axles:'18 m de longitud útil hipotética; capacidad/ejes NO certificados'}
+];
+function fleetNature(){
+ const choice=$('fleetNature').value;if(choice!=='auto')return choice;
+ const names=items.map(i=>i.name+' '+(i.sku||'')).join(' ').toLowerCase();
+ if(/transformador|transformer/.test(names))return 'transformer';
+ if(/gabinete|tablero|electri|switchgear|celda/.test(names))return 'electrical';
+ if(/excavadora|gr[uú]a|maquinaria|tractor|pala|bulldozer/.test(names))return 'machine';
+ return 'general';
+}
+// Guillotine free-rectangle packer: conserva orientación permitida, separación y peso.
+// Devuelve una solución geométrica candidata; no certifica apoyos ni trincaje.
+function fleetTryPack(profile,order,gap){
+ // Zona de colocación ampliada SOLO para representar posibles sobresalientes laterales.
+ // No significa aprobación de apoyos, estructura, ancho vial o permisos.
+ const overhangAllowance=profile.kind==='flat'?0:0.25;
+ const packW=profile.W+2*overhangAllowance;
+ let units=[],unfit=[],oversized=[];
+ for(const a of order){
+   const orientations=[{l:a.l,w:a.w,rot:false}];
+   if(a.rotate&&Math.abs(a.l-a.w)>.001)orientations.push({l:a.w,w:a.l,rot:true});
+   const fits=orientations.some(o=>o.l<=profile.L+1e-8&&o.w<=packW+1e-8);
+   if(!fits){oversized.push(a);continue}
+   if(a.kg>profile.kg){unfit.push({item:a,reason:'Peso unitario mayor que capacidad referencial'});continue}
+   let best=null;
+   for(let ui=0;ui<=units.length;ui++){
+     const u=units[ui]||{free:[{x:0,y:0,w:profile.L,h:packW}],weight:0,items:[]};
+     if(u.weight+a.kg>profile.kg+1e-8)continue;
+     for(let ri=0;ri<u.free.length;ri++)for(const o of orientations){
+       const r=u.free[ri],needL=o.l+(r.x>1e-6?gap:0),needW=o.w+(r.y>1e-6?gap:0);
+       if(needL>r.w+1e-8||needW>r.h+1e-8)continue;
+       const score=ui*1e6+(r.w*r.h-needL*needW)+Math.abs((r.x+needL/2)-profile.L/2)*.01;
+       if(!best||score<best.score)best={ui,ri,o,score,needL,needW};
+     }
+   }
+   if(!best){unfit.push({item:a,reason:'No se encontró espacio compatible'});continue}
+   if(best.ui===units.length)units.push({free:[{x:0,y:0,w:profile.L,h:packW}],weight:0,items:[]});
+   const u=units[best.ui],r=u.free.splice(best.ri,1)[0],x=r.x+(r.x>1e-6?gap:0),y=r.y+(r.y>1e-6?gap:0)-overhangAllowance;
+   u.items.push({...a,l:best.o.l,w:best.o.w,x,y,z:0,rotated:best.o.rot});u.weight+=a.kg;
+   // Guillotine split: dos variantes, elegir según área residual.
+   const right={x:r.x+best.needL,y:r.y,w:r.w-best.needL,h:r.h};
+   const top={x:r.x,y:r.y+best.needW,w:best.needL,h:r.h-best.needW};
+   for(const q of [right,top])if(q.w>.001&&q.h>.001)u.free.push(q);
+ }
+ for(const u of units)centerPackedGroup(u.items,profile.L,profile.W);
+ return {units,unfit,oversized};
+}
+function fleetPlan(profile,gap){
+ const source=items.map(i=>({...i}));
+ const orders=[
+ [...source].sort((a,b)=>b.l*b.w-a.l*a.w||b.kg-a.kg),
+ [...source].sort((a,b)=>b.kg-a.kg||b.l*b.w-a.l*a.w),
+ [...source].sort((a,b)=>Math.max(b.l,b.w)-Math.max(a.l,a.w))
+ ];
+ let best=null;
+ for(const o of orders){const r=fleetTryPack(profile,o,gap);const penalty=(r.unfit.length+r.oversized.length)*10000+r.units.length;
+ if(!best||penalty<best.penalty)best={...r,penalty};}
+ return best;
+}
+function calculateFleet(){
+ const el=$('fleetResults');if(!items.length){el.innerHTML='<div class="fleet-warn">Primero agrega bultos o importa un packing list.</div>';return}
+ const gap=(+$('fleetGap').value||0)/100,support=Math.max(0,+$('fleetSupport').value||0),road=+$('fleetRoad').value||0;
+ const nature=fleetNature(),cg=$('fleetCG').value,mfg=$('fleetManufacturer').value;
+ const sensitive=['transformer','electrical','fragile'].includes(nature);
+ const allWeight=items.reduce((s,a)=>s+a.kg,0);
+ const priceMap={flat:'priceFlat',low:'priceLow',cradle:'priceCradle',modular:'priceModular'};
+ const results=fleetProfiles().map(p=>{
+   const r=fleetPlan(p,gap),height=p.deck+support+Math.max(0,...items.map(a=>a.h));
+   const blockers=[],warnings=[],checks=[];
+   if(r.unfit.length)blockers.push(`${r.unfit.length} bulto(s) no ubicados por capacidad o espacio: no se consideran transportados.`);
+   if(r.oversized.length)blockers.push(`${r.oversized.length} bulto(s) exceden incluso el rango de estudio geométrico de este equipo: no se asignaron. Considerar equipo más ancho/largo u otra configuración.`);
+   if(road>0&&height>road+1e-6)warnings.push(`Altura estimada ${height.toFixed(2)} m supera referencia operativa ${road.toFixed(2)} m: ruta pendiente de estudio. NO autoriza circulación.`);
+   // Reportar los sobresalientes de CADA bulto y distinguir geometría de seguridad.
+   const lateralOverhangs=r.units.flatMap(u=>u.items.map(a=>({id:a.id,left:Math.max(0,-a.y),right:Math.max(0,a.y+a.w-p.W)})));
+   const maxOverhang=Math.max(0,...lateralOverhangs.flatMap(a=>[a.left,a.right]));
+   if(maxOverhang>.001)warnings.push(`Sobresaliente lateral modelado hasta ${(maxOverhang*100).toFixed(0)} cm por lado. Requiere validar apoyo real, trincaje, estabilidad, ancho máximo y permisos; NO se considera aprobado.`);
+   if(p.kind==='flat'&&nature!=='general')warnings.push('Carga especial/sensible: la plataforma no es preferente sin instrucciones del fabricante y evaluación de estabilidad.');
+   if(mfg==='low'&&p.kind==='flat')blockers.push('Fabricante exige cama baja / cama cuna: plataforma excluida por restricción declarada.');
+   if(mfg==='special'&&p.kind!=='modular')blockers.push('Fabricante exige ingeniería especial: este perfil convencional queda excluido.');
+   if(mfg==='flat'&&p.kind!=='flat')warnings.push('Fabricante autoriza plataforma según condiciones; comprobar necesidad de equipo especial.');
+   if(cg==='high'&&p.kind==='flat')warnings.push('Centro de gravedad alto: riesgo potencial de estabilidad; no aprobar sin análisis de estabilidad y reparto por ejes.');
+   if(sensitive)warnings.push('Equipo sensible: comprobar manual, puntos de apoyo, inclinación admisible, vibraciones y trincaje.');
+   if(cg==='unknown')checks.push('Centro de gravedad desconocido: estabilidad no verificada.');
+   if(mfg==='unknown')checks.push('Instrucciones y restricciones del fabricante no confirmadas.');
+   checks.push('Capacidad útil real, tara, PBV, ejes, resistencia del piso, apoyos y ruta requieren datos del equipo/proveedor.');
+   if(p.kind==='modular')checks.push('Capacidad por línea de ejes y configuración modular sin ficha técnica: no asumir 60 t como capacidad certificada.');
+   const assigned=r.units.reduce((n,u)=>n+u.items.length,0);
+   if(assigned!==items.length)blockers.push(`Solo ${assigned}/${items.length} bultos asignados; los demás quedan pendientes.`);
+   const hard=blockers.length>0;
+   const status=hard?'reject':'pending'; // no se emite APTO sin datos técnicos certificados
+   let preference=(nature==='general'?({flat:8,low:5,cradle:2,modular:0}):sensitive||cg==='high'?({low:9,cradle:7,flat:3,modular:1}):({flat:7,low:5,cradle:3,modular:1}))[p.kind]||0;
+   if(cg==='high'&&p.kind==='flat')preference-=5;
+   if(mfg==='low'&&p.kind==='low')preference+=6;
+   if(mfg==='special'&&p.kind==='modular')preference+=8;
+   const reason=p.kind==='low'?'Piso rebajado: reduce la altura estimada frente a plataforma; verificar longitud de pozo, apoyos, estabilidad y ejes.':
+     p.kind==='flat'?'Mayor superficie útil; opción para carga compatible cuando altura, estabilidad, apoyos y fabricante lo permitan.':
+     p.kind==='cradle'?'Piso más bajo en perfil ilustrativo; requiere justificar necesidad de cuna y verificar apoyos.':
+     'Solución multieje especializada; exige ficha de líneas de ejes, acoplamiento, ruta y estudio de ingeniería.';
+   const priceInput=$(priceMap[p.kind]);const price=priceInput&&priceInput.value.trim()!==''?Number(priceInput.value):null;
+   return {profile:p,...r,height,blockers,warnings,checks,status,preference,reason,price,lateralOverhangs,assigned};
+ });
+ // Seguridad antes que precio: los rechazados nunca participan en la recomendación.
+ results.sort((a,b)=>(a.status==='reject'?1:0)-(b.status==='reject'?1:0)||a.units.length-b.units.length||b.preference-a.preference||a.profile.deck-b.profile.deck);
+ fleetLast=results;
+ const best=results.find(r=>r.status!=='reject');
+ const intro=`<p><b>${items.length} bulto(s) · ${allWeight.toLocaleString('es-PE')} kg</b> · Tipo: ${fleetEscape(nature)} · Separación ${Math.round(gap*100)} cm.</p>`;
+ const headline=best?`<div class="fleet-warn"><b>★ Preferencia técnica preliminar: ${fleetEscape(best.units.length+' × '+best.profile.name)}.</b> Motivo: ${fleetEscape(best.reason)} <b>PENDIENTE DE VALIDACIONES: NO AUTORIZA EL TRANSPORTE.</b></div>`:'<div class="fleet-bad"><b>NINGUNA CONFIGURACIÓN DEMOSTRATIVA ASIGNA EL 100% DE LA CARGA.</b> No se propone transporte. Revisar orientación, dimensiones, altura, apoyos y equipos especiales.</div>';
+ const priceReady=results.filter(r=>r.status!=='reject'&&Number.isFinite(r.price)&&r.price>=0);
+ const costs=`<details class="fleet-cost-report"><summary>Comparativo económico (informativo)</summary><div class="fleet-warn">Las alternativas tienen validaciones técnicas pendientes. <b>No se elige ni aprueba un vehículo por precio.</b> Los importes solo se muestran para planificación y no incluyen costos adicionales no ingresados.</div>${priceReady.length?priceReady.map(r=>`<div class="fleet-unit">${fleetEscape(r.profile.name)}: ${r.units.length} × S/ ${r.price.toLocaleString('es-PE')} = <b>S/ ${(r.units.length*r.price).toLocaleString('es-PE')}</b> (referencial, sujeto a validación)</div>`).join(''):'<p class="fleet-muted">Ingresa tarifas en «Comparativo económico opcional» para ver escenarios referenciales.</p>'}</details>`;
+ const compactHeadline=best?`<div class="fleet-summary-head"><strong>★ Preferencia técnica preliminar: ${fleetEscape(best.profile.name)} · ${best.units.length} unidad(es)</strong><span>Requiere validación técnica; no constituye autorización de transporte.</span></div>`:'<div class="fleet-bad"><b>Ninguna configuración demostrativa asigna toda la carga.</b> Revisa equipos especiales, dimensiones y restricciones.</div>';
+ el.innerHTML=intro+compactHeadline+results.map((r,i)=>{
+   const p=r.profile,hard=r.status==='reject',isBest=best===r;
+   const title=hard?'No asigna toda la carga':isBest?'Preferencia preliminar':'Alternativa condicionada';
+   const over=r.lateralOverhangs.filter(a=>a.left>.001||a.right>.001);
+   const maxLeft=Math.max(0,...over.map(a=>a.left)),maxRight=Math.max(0,...over.map(a=>a.right));
+   const assignedKg=r.units.reduce((sum,u)=>sum+u.weight,0);
+   const detailCount=r.blockers.length+r.warnings.length+r.checks.length+(over.length?1:0);
+   const issueSummary=[];
+   if(r.blockers.length)issueSummary.push(`${r.blockers.length} restricción(es) de asignación`);
+   if(over.length)issueSummary.push(`${over.length} bulto(s) con sobresaliente lateral (máx. izq. ${(maxLeft*100).toFixed(0)} cm / der. ${(maxRight*100).toFixed(0)} cm)`);
+   if(road>0&&r.height>road+.0001)issueSummary.push(`Altura ${r.height.toFixed(2)} m supera referencia ${road.toFixed(2)} m`);
+   const otherWarnings=r.warnings.filter(t=>!t.startsWith('Altura estimada')&&!t.startsWith('Sobresaliente lateral modelado'));
+   if(otherWarnings.length)issueSummary.push(`${otherWarnings.length} advertencia(s) adicional(es)`);
+   const summary=issueSummary.length?issueSummary.join(' · '):'Sin alertas geométricas detectadas; faltan validaciones técnicas.';
+   return `<section class="fleet-option fleet-compact ${hard?'v5-rejected':isBest?'best':'v5-pending'}">
+      <div class="fleet-compact-top"><div><div class="fleet-compact-name">${fleetEscape(p.name)}</div><div class="fleet-compact-status">${title}</div></div><span class="fleet-compact-badge ${hard?'bad':isBest?'preferred':'pending'}">${hard?'SIN PROPUESTA COMPLETA':isBest?'PREFERENCIA PRELIMINAR':'VALIDACIÓN PENDIENTE'}</span></div>
+      <div class="fleet-compact-metrics"><div><small>Unidades</small><b>${r.units.length}</b></div><div><small>Bultos asignados</small><b>${r.assigned}/${items.length}</b></div><div><small>Peso asignado</small><b>${assignedKg.toLocaleString('es-PE')} kg</b></div><div><small>Altura estimada</small><b>${r.height.toFixed(2)} m</b></div></div>
+      <div class="fleet-compact-note ${hard?'danger':'warning'}"><strong>${hard?'Restricción principal':'Atención técnica'}:</strong> ${fleetEscape(summary)}</div>
+      <details class="fleet-compact-details"><summary>Ver detalles técnicos (${detailCount})</summary><div class="fleet-detail-body">
+       <p class="fleet-muted"><b>Justificación:</b> ${fleetEscape(r.reason)}</p>
+       <div><span class="fleet-chip">Área útil ${p.L.toFixed(2)} × ${p.W.toFixed(2)} m</span><span class="fleet-chip">Capacidad ilustrativa ${p.kg.toLocaleString('es-PE')} kg</span><span class="fleet-chip">${fleetEscape(p.axles)}</span></div>
+       ${r.blockers.map(t=>'<div class="fleet-bad"><b>Restricción:</b> '+fleetEscape(t)+'</div>').join('')}
+       ${over.length?`<details class="fleet-subdetails"><summary>Sobresalientes por bulto (${over.length}) · máx. izquierda ${(maxLeft*100).toFixed(0)} cm / derecha ${(maxRight*100).toFixed(0)} cm</summary><div class="fleet-overhang-list">${over.map(a=>`<div>Bulto #${a.id}: izquierda ${(a.left*100).toFixed(0)} cm · derecha ${(a.right*100).toFixed(0)} cm</div>`).join('')}</div></details>`:''}
+       ${r.warnings.map(t=>'<div class="fleet-warn">⚠ '+fleetEscape(t)+'</div>').join('')}
+       <details class="fleet-subdetails"><summary>Validaciones de ingeniería pendientes (${r.checks.length})</summary>${r.checks.map(t=>'<p class="fleet-muted">• '+fleetEscape(t)+'</p>').join('')}</details>
+      </div></details>
+      <details class="fleet-compact-details"><summary>Distribución por unidad (${r.units.length})</summary><div class="fleet-detail-body">${r.units.map((u,j)=>`<div class="fleet-unit"><b>Unidad ${j+1} de ${r.units.length}:</b> ${u.items.length} bulto(s), ${u.weight.toLocaleString('es-PE')} kg · IDs ${u.items.map(a=>'#'+a.id).join(', ')} <button onclick="previewFleetUnit(${i},${j})">Ver distribución 2D/3D</button></div>`).join('')||'<p class="fleet-muted">No hay unidades asignadas.</p>'}</div></details>
+   </section>`;
+ }).join('')+costs+'<details class="fleet-compact-details fleet-disclaimer"><summary>Alcance y limitaciones del análisis</summary><p class="fleet-muted">Motor heurístico: no garantiza el mínimo matemático. Perfiles y capacidades ilustrativos, no certificados. La carga no ubicada no se considera transportada. La referencia de 5.20 m es operativa, no permiso legal ni garantía de gálibo. Ninguna opción se declara apta sin ingeniería y ficha técnica.</p></details>';
+
+}
+
+function previewFleetUnit(i,j){
+ const result=fleetLast[i],u=result?.units[j];if(!u)return;
+ const p=result.profile;
+ const preset=p.kind==='low'?'Cama baja (Lowboy) / referencia':p.kind==='cradle'?'Cama cuna / referencia':p.kind==='modular'?'Modular hidráulico / configurable':'Personalizado';
+ if(!confirm('Mostrar solo los bultos de esta unidad en el cubicador 2D/3D. Se sustituirá temporalmente la carga visible; guarda antes tu proyecto si quieres conservarlo.'))return;
+ if(!fleetBackup)fleetBackup={items:items.map(a=>({...a})),uid,preset:$('preset').value,cl:$('cl').value,cw:$('cw').value,payload:$('payload').value,deckHeight:$('deckHeight').value,clearance:$('clearance').value};
+ $('fleetRestore').style.display='inline-block';
+ $('preset').value=preset;applyPreset();$('cl').value=p.L;$('cw').value=p.W;$('payload').value=p.kg;$('deckHeight').value=p.deck;
+ items=u.items.map(a=>({...a}));uid=Math.max(1,...items.map(a=>a.id+1));selected=items[0]?.id||null;
+ $('clearance').value=String((+$('fleetGap').value||0)/100);refresh();
+ document.getElementById('threeWrap').scrollIntoView({behavior:'smooth',block:'center'});
+ window.set3DView?.('iso');
+}
+function restoreFleetPacking(){
+ if(!fleetBackup)return;const b=fleetBackup;fleetBackup=null;
+ $('preset').value=b.preset;applyPreset();
+ for(const k of ['cl','cw','payload','deckHeight','clearance'])$(k).value=b[k];
+ items=b.items;uid=b.uid;selected=null;refresh();$('fleetRestore').style.display='none';calculateFleet();
+}
+
 
 refresh();
 </script>
@@ -414,6 +946,7 @@ const canvas=document.getElementById('threeCanvas'),wrap=document.getElementById
       labels=document.getElementById('labelLayer'),tip=document.getElementById('tooltip3d');
 
 let renderer,scene,camera,controls,cargoGroup,equipGroup,cgMesh;
+let vehicleDetailMode='exterior';
 let raycaster=new THREE.Raycaster(),pointer=new THREE.Vector2(),meshes=[],showLabels=true;
 let dragging=null,moveMode='xy',dragPlane=new THREE.Plane(),dragOffset=new THREE.Vector3(),dragHit=new THREE.Vector3();
 let textureCache=new Map();
@@ -459,17 +992,24 @@ function collision3D(a){
  return items.some(b=>b.id!==a.id&&b.x!=null&&overlap1(a.x,a.x+a.l,b.x,b.x+b.l)&&overlap1(a.y,a.y+a.w,b.y,b.y+b.w)&&overlap1(az,az+a.h,b.z||0,(b.z||0)+b.h))
 }
 function supportHeight(a){
+ if($('v5StackPolicy')?.value==='off')return 0;
  // Highest top surface below the selected footprint. Default deck = 0.
  let best=0;
  items.forEach(b=>{if(b.id===a.id||b.x==null)return;
    let xy=overlap1(a.x,a.x+a.l,b.x,b.x+b.l)&&overlap1(a.y,a.y+a.w,b.y,b.y+b.w);
-   if(xy)best=Math.max(best,(b.z||0)+b.h);
+   if(xy&&b.stack&&(b.maxTopLoad||0)>=a.kg&&a.x>=b.x-.005&&a.y>=b.y-.005&&a.x+a.l<=b.x+b.l+.005&&a.y+a.w<=b.y+b.w+.005)best=Math.max(best,(b.z||0)+b.h);
  });return best;
 }
 function makeFloatingLabel(a,isOOG){
  let d=document.createElement('div');d.className='label3d'+(isOOG?' oog':'');
  d.innerHTML=`<b>${String(a.id).padStart(3,'0')} - ${a.name}</b><br>${a.l.toFixed(2)} × ${a.w.toFixed(2)} × ${a.h.toFixed(2)} m`;
  labels.appendChild(d);return d
+}
+function makeCargoMesh(a,isOOG){
+ // Cargo geometry remains a rectangular bounding envelope: detailed shapes must never change fit checks.
+ const mesh=new THREE.Mesh(new THREE.BoxGeometry(a.l,a.h,a.w),makeMaterials(a,isOOG));
+ mesh.userData.itemId=a.id;
+ return mesh;
 }
 function boxMesh(w,h,d,mats){
  let g=new THREE.BoxGeometry(w,h,d),m=new THREE.Mesh(g,mats);return m
@@ -479,23 +1019,163 @@ try{
  renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true});renderer.setPixelRatio(Math.min(devicePixelRatio,2));renderer.shadowMap.enabled=true;
  scene=new THREE.Scene();scene.background=new THREE.Color(0xf4f4f2);
  camera=new THREE.PerspectiveCamera(42,1,.05,500);
- controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.08;controls.zoomToCursor=true;
+ controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.dampingFactor=.08;controls.zoomToCursor=true;controls.maxPolarAngle=Math.PI/2-0.045;controls.minDistance=3;
  scene.add(new THREE.HemisphereLight(0xffffff,0x777777,2.2));
  let sun=new THREE.DirectionalLight(0xffffff,2.4);sun.position.set(8,12,7);sun.castShadow=true;scene.add(sun);
  cargoGroup=new THREE.Group();equipGroup=new THREE.Group();scene.add(equipGroup,cargoGroup);
  let grid=new THREE.GridHelper(50,50,0x999999,0xd9d9d9);scene.add(grid);
 
  function equipment(){
-   equipGroup.clear();let L=+$('cl').value,W=+$('cw').value,H=+$('ch').value,kind=presets[$('preset').value]?.kind||'custom';
-   let mat=new THREE.MeshStandardMaterial({color:0x222222,roughness:.7});
-   let deck=new THREE.Mesh(new THREE.BoxGeometry(L,.10,W),mat);deck.position.set(L/2,.05,W/2);deck.receiveShadow=true;equipGroup.add(deck);
-   let grid2=new THREE.GridHelper(Math.max(L,W),Math.max(4,Math.round(Math.max(L,W))),0x555555,0x999999);grid2.scale.z=W/Math.max(L,W);grid2.position.set(L/2,.105,W/2);equipGroup.add(grid2);
-   if(kind==='container'||kind==='closed'){
-     let shell=new THREE.Mesh(new THREE.BoxGeometry(L,H,W),new THREE.MeshStandardMaterial({color:0x8d8d8d,transparent:true,opacity:.09,depthWrite:false}));
-     shell.position.set(L/2,H/2,W/2);equipGroup.add(shell);
-     let edges=new THREE.LineSegments(new THREE.EdgesGeometry(shell.geometry),new THREE.LineBasicMaterial({color:0x111111,transparent:true,opacity:.65}));edges.position.copy(shell.position);equipGroup.add(edges);
+   // All vehicle dimensions are illustrative; cargo geometry and engineering calculations stay separate.
+   equipGroup.clear();
+   const L=+$('cl').value,W=+$('cw').value,preset=$('preset').value;
+   const kind=presets[preset]?.kind||'custom';
+   const low=/Cama baja|Cama cuna/.test(preset), cradle=/Cama cuna/.test(preset);
+   const deckH=Math.max(.5,+$('deckHeight').value||0);
+   const ground=-deckH; grid.position.y=ground-.018;
+   const steel=new THREE.MeshStandardMaterial({color:0x1768a2,metalness:.58,roughness:.34});
+   const navy=new THREE.MeshStandardMaterial({color:0x183247,metalness:.53,roughness:.39});
+   const trim=new THREE.MeshStandardMaterial({color:0xd0d8de,metalness:.7,roughness:.28});
+   const tireMat=new THREE.MeshStandardMaterial({color:0x14191f,roughness:.94});
+   const hubMat=new THREE.MeshStandardMaterial({color:0x9daab6,metalness:.78,roughness:.24});
+   const red=new THREE.MeshStandardMaterial({color:0xc72c34,metalness:.34,roughness:.39});
+   const glass=new THREE.MeshStandardMaterial({color:0x7faabd,metalness:.32,roughness:.24,transparent:true,opacity:.88});
+   const amber=new THREE.MeshStandardMaterial({color:0xf7a329,emissive:0x5a2700});
+   const rubber=new THREE.MeshStandardMaterial({color:0x262d34,roughness:.85});
+   function part(x,y,z,l,h,w,mat=steel){let m=new THREE.Mesh(new THREE.BoxGeometry(l,h,w),mat);m.position.set(x,y,z);m.castShadow=true;m.receiveShadow=true;equipGroup.add(m);return m}
+   function wheel(x,z,r=.43,dual=false){
+     const offsets=dual?[-.115,.115]:[0];
+     offsets.forEach(o=>{
+       const tire=new THREE.Mesh(new THREE.CylinderGeometry(r,r,.205,40),tireMat);
+       tire.rotation.x=Math.PI/2;tire.position.set(x,ground+r,z+o);tire.castShadow=true;equipGroup.add(tire);
+       const hub=new THREE.Mesh(new THREE.CylinderGeometry(r*.43,r*.43,.215,28),hubMat);
+       hub.rotation.x=Math.PI/2;hub.position.copy(tire.position);equipGroup.add(hub);
+       const ring=new THREE.Mesh(new THREE.TorusGeometry(r*.66,.025,8,36),rubber);
+       ring.position.set(x,ground+r,z+o+(z<W/2?-.11:.11));equipGroup.add(ring);
+     });
+   }
+   function visualDetail(x,y,z,l,h,w,mat){if(vehicleDetailMode==='exterior')part(x,y,z,l,h,w,mat)}
+   // Freight placement always uses deck top Y=0 and X=0..L. Do not move freight origin.
+   const deckT=.16;
+   if(low){
+     // Recessed bed with visible neck, wheel bridge, longitudinal beams and approach ramps.
+     part(L/2,-deckT/2,W/2,L,deckT,W,steel);
+     part(L/2,-.25,.13,L,.32,.25,navy);
+     part(L/2,-.25,W-.13,L,.32,.25,navy);
+     for(let x=1.2;x<L;x+=1.45)part(x,-.18,W/2,.085,.22,W-.32,navy);
+     const neckX=-1.05,neckLen=2.1;
+     part(neckX,.53,W/2,neckLen,.20,W,steel);
+     part(-.25,.20,W/2,.65,.50,W,steel);
+     part(-1.72,.12,.20,.17,.65,.27,navy);
+     part(-1.72,.12,W-.20,.17,.65,.27,navy);
+     part(-1.8,.34,W/2,.72,.17,1.1,navy);
+     const bridgeX=L+.88;
+     part(bridgeX,.53,W/2,2.0,.22,W,steel);
+     part(L+.16,.20,W/2,.38,.52,W,steel);
+     part(L+1.85,.20,.52,.75,.11,.78,navy);
+     part(L+1.85,.20,W-.52,.75,.11,.78,navy);
+     if(cradle){part(L/2,.10,.16,L,.26,.22,navy);part(L/2,.10,W-.16,L,.26,.22,navy);}
+     // Visible well boundary: the only loadable area is X=0..L, Z=0..W.
+     for(const x of [.025,L-.025])part(x,.055,W/2,.05,.11,W,trim);
+     // Deck strips for recognizable transport surface.
+     for(let x=.45;x<L;x+=1.15){part(x,.012,.62,.35,.018,.16,trim);part(x,.012,W-.62,.35,.018,.16,trim);}
+   }else{
+     part(L/2,-deckT/2,W/2,L,deckT,W,steel);
+     part(L/2,-.26,.22,L,.32,.26,navy);part(L/2,-.26,W-.22,L,.32,.26,navy);
+     for(let x=.6;x<L;x+=1.25)part(x,-.18,W/2,.1,.2,W-.45,navy);
+   }
+   if(vehicleDetailMode==='exterior' && (kind==='open'||kind==='custom')){
+     for(let x=.45;x<L;x+=.85){visualDetail(x,-.012,.12,.035,.025,.18,trim);visualDetail(x,-.012,W-.12,.035,.025,.18,trim)}
+     visualDetail(L+.025,-.12,W/2,.05,.18,W,red);
+   }
+   if(kind==='container'||kind==='closed'||kind==='rigid'){
+     const H=+$('ch').value;
+     const wallMat=new THREE.MeshStandardMaterial({color:0x27617f,metalness:.35,roughness:.55,transparent:true,opacity:vehicleDetailMode==='exterior'?.34:.055,depthWrite:false,side:THREE.DoubleSide});
+     const roofMat=new THREE.MeshStandardMaterial({color:0x46768e,metalness:.25,roughness:.58,transparent:true,opacity:vehicleDetailMode==='exterior'?.40:.04,depthWrite:false,side:THREE.DoubleSide});
+     const ribMat=new THREE.MeshStandardMaterial({color:0x1d4964,metalness:.52,roughness:.4,transparent:true,opacity:vehicleDetailMode==='exterior'?.8:.25});
+     part(L/2,H/2,.012,L,H,.024,wallMat);
+     part(L/2,H/2,W-.012,L,H,.024,wallMat);
+     part(L/2,H-.012,W/2,L,.024,W,roofMat);
+     part(.012,H/2,W/2,.024,H,W,wallMat);
+     part(L-.012,H/2,W/2,.024,H,W,wallMat);
+     for(let x=.12;x<L;x+=.68){
+       part(x,H/2,.01,.025,H,.028,ribMat);
+       part(x,H/2,W-.01,.025,H,.028,ribMat);
+       part(x,H-.01,W/2,.025,.028,W,ribMat);
+     }
+     for(const z of [.03,W-.03]){
+       part(L-.045,H/2,z,.035,H,.035,ribMat);
+       part(.045,H/2,z,.035,H,.035,ribMat);
+     }
+     const edgeBox=new THREE.BoxGeometry(L,H,W);
+     const edges=new THREE.LineSegments(new THREE.EdgesGeometry(edgeBox),new THREE.LineBasicMaterial({color:0x173b50,transparent:true,opacity:.7}));
+     edges.position.set(L/2,H/2,W/2);equipGroup.add(edges);
+   }
+   if(kind==='rigid'){
+     // Camión rígido: cabina unida al mismo chasis que el cajón; no quinta rueda.
+     const mid=W/2, cabL=Math.min(2.15,Math.max(1.55,L*.36));
+     const cabX=-cabL/2-.12, cabWidth=Math.min(W,2.35);
+     const groundOffset=ground;
+     part(L/2,-.32,mid,L+.30,.22,Math.min(W,1.25),navy);
+     part(cabX,groundOffset+.96,mid,cabL,1.72,cabWidth,red);
+     part(cabX,groundOffset+1.86,mid,cabL*.85,.13,cabWidth,red);
+     part(-cabL-.16,groundOffset+1.22,mid,.06,.67,cabWidth*.85,glass);
+     part(-cabL-.23,groundOffset+.69,mid,.14,.28,cabWidth*.88,trim);
+     for(const z of [mid-cabWidth*.47,mid+cabWidth*.47]){
+       part(cabX,groundOffset+1.30,z,.62,.55,.04,glass);
+     }
+     const axles=L>9?3:2;
+     const rearPositions=axles===3?[L-.80,L-1.55]:[L-.70];
+     for(const x of [-cabL*.57,...rearPositions]){
+       for(const z of [-.15,W+.15])wheel(x,z,.39,true);
+     }
+     for(let x=.65;x<L;x+=1.5){part(x,-.10,-.025,.10,.08,.06,amber);part(x,-.10,W+.025,.10,.08,.06,amber)}
+     part(L+.02,.42,mid,.07,.50,W,trim);
    }else if(kind==='modular'){
-     let lines=Math.max(1,+$('axles').value||12);for(let i=0;i<lines;i++){let x=(i+.5)*L/lines;[-.22,W+.22].forEach(z=>{let wh=new THREE.Mesh(new THREE.CylinderGeometry(.16,.16,.12,18),new THREE.MeshStandardMaterial({color:0x111111}));wh.rotation.x=Math.PI/2;wh.position.set(x,-.10,z);equipGroup.add(wh)})}
+     let lines=Math.max(1,+$('axles').value||12);
+     for(let i=0;i<lines;i++){let x=(i+.5)*L/lines;wheel(x,-.18,.29);wheel(x,W+.18,.29);}
+   }else if(kind==='open'||kind==='custom'||kind==='container'||kind==='closed'){
+     // Travel direction -X. Tractor is ahead of neck, semitrailer extends toward +X.
+     const center=W/2,front=-5.3,drive1=-2.55,drive2=-1.80;
+     const tractorDeck=ground+1.10;
+     part(-3.27,tractorDeck-.09,center,4.7,.20,1.05,navy);
+     part(-2.6,tractorDeck+.03,center,1.5,.10,1.45,trim);
+     part(-1.63,tractorDeck+.14,center,.65,.17,.90,rubber); // fifth wheel
+     // Cabin front points toward -X, matching steering axle location.
+     const cabX=-4.70,cabBottom=ground+.78;
+     part(cabX,cabBottom+.90,center,1.85,1.80,2.35,red);
+     part(-5.58,cabBottom+.56,center,.16,.78,2.1,glass); // windshield
+     part(-4.95,cabBottom+1.76,center,1.58,.14,2.32,red); // roof
+     part(-5.68,cabBottom+.18,center,.19,.37,2.26,trim); // bumper
+     part(-5.77,cabBottom+.48,center,.06,.16,1.30,navy); // grille
+     for(const z of [center-.94,center+.94]){
+       part(-5.77,cabBottom+.59,z,.08,.23,.26,amber);
+       part(-4.62,cabBottom+1.07,z+(z<center?-.25:.25),.68,.68,.04,glass);
+       part(-5.27,cabBottom+1.38,z+(z<center?-.30:.30),.07,.32,.18,navy); // mirror
+     }
+     part(-3.38,cabBottom+.22,center,1.0,.40,1.30,trim); // fuel tank
+     if(vehicleDetailMode==='exterior'){
+       for(const z of [center-1.19,center+1.19]){
+         visualDetail(-4.20,cabBottom+.76,z,.045,1.13,.035,navy);
+         visualDetail(-4.58,cabBottom+.36,z,.68,.055,.055,trim);
+       }
+       visualDetail(-4.84,cabBottom+1.89,center,1.18,.15,2.0,red);
+       for(let i=0;i<5;i++)visualDetail(-5.82,cabBottom+.29+i*.075,center,.035,.025,1.35,trim);
+       visualDetail(-2.15,ground+.93,center,1.52,.13,2.45,navy);
+       visualDetail(L-.25,-.20,center,.08,.16,W,red);
+     }
+     // Axles: steer 1, driven tandem 2. Dual tires on driven axle groups.
+     for(const z of [-.14,W+.14])wheel(front,z,.48,false);
+     for(const x of [drive1,drive2])for(const z of [-.23,W+.23])wheel(x,z,.47,true);
+     // Trailer tridem, on wheel bridge for lowboy, under rear deck for platform.
+     const trailerAxles=kind==='modular'?[]:(low?[L+.28,L+.88,L+1.48]:[L-1.65,L-.97,L-.29]);
+     for(const x of trailerAxles){
+       part(x,ground+.83,center,.13,.12,W-.22,navy);
+       for(const z of [-.23,W+.23])wheel(x,z,.40,true);
+     }
+     // Side marker lamps and landing gear.
+     for(let x=1.2;x<L;x+=2.1){part(x,-.13,-.02,.12,.09,.07,amber);part(x,-.13,W+.02,.12,.09,.07,amber);}
+     part(-.40,ground+.53,.25,.12,1.05,.12,navy);part(-.40,ground+.53,W-.25,.12,1.05,.12,navy);
    }
  }
 
@@ -503,7 +1183,7 @@ try{
    if(dragging)return;
    equipment();cargoGroup.clear();labels.innerHTML='';meshes=[];
    items.filter(a=>a.x!=null).forEach(a=>{
-     if(a.z==null)a.z=0;let oo=oog3D(a),m=boxMesh(a.l,a.h,a.w,makeMaterials(a,oo.any));
+     if(a.z==null)a.z=0;let oo=oog3D(a),m=makeCargoMesh(a,oo.any);
      m.position.set(a.x+a.l/2,a.z+a.h/2,a.y+a.w/2);m.castShadow=true;m.userData.itemId=a.id;
      let edge=new THREE.LineSegments(new THREE.EdgesGeometry(m.geometry),new THREE.LineBasicMaterial({color:oo.any||collision3D(a)?0xb00020:0xffffff,linewidth:2}));edge.userData.edge=true;m.add(edge);
      cargoGroup.add(m);meshes.push({mesh:m,item:a,label:makeFloatingLabel(a,oo.any)});
@@ -511,16 +1191,22 @@ try{
    let tc=technicalCalc();if(cgMesh)scene.remove(cgMesh);
    cgMesh=new THREE.Mesh(new THREE.SphereGeometry(.13,20,20),new THREE.MeshStandardMaterial({color:0xff006e,emissive:0x550022}));
    cgMesh.position.set(tc.cgx,Math.max(.15,tc.cgz),tc.cgy);scene.add(cgMesh);
-   let L=+$('cl').value,W=+$('cw').value;controls.target.set(L/2,Math.max(1,+$('ch').value/3),W/2);
+   let L=+$('cl').value,W=+$('cw').value;controls.target.set(L*.25-1.2,Math.max(.45,+$('ch').value/5),W/2);
  }
  window.refresh3D=rebuild;
+ window.setVehicleDetailMode=(mode)=>{
+   vehicleDetailMode=mode==='technical'?'technical':'exterior';
+   document.getElementById('v5ExteriorBtn').style.fontWeight=vehicleDetailMode==='exterior'?'bold':'normal';
+   document.getElementById('v5TechnicalBtn').style.fontWeight=vehicleDetailMode==='technical'?'bold':'normal';
+   rebuild();
+ };
  window.setMoveMode=m=>{moveMode=m;canvas.style.cursor=m==='z'?'ns-resize':'grab'};
  window.rotateSelected3D=()=>{
    let a=cargoById(selected);if(!a||!a.rotate)return;let cx=a.x+a.l/2,cy=a.y+a.w/2;[a.l,a.w]=[a.w,a.l];a.x=cx-a.l/2;a.y=cy-a.w/2;refresh()
  };
  window.dropSelected3D=()=>{let a=cargoById(selected);if(!a)return;a.z=0;let guard=0;while(guard++<items.length+2){let h=supportHeight(a);if(Math.abs(h-a.z)<1e-5)break;a.z=h}refresh()};
- window.set3DView=(v)=>{let L=+$('cl').value,W=+$('cw').value,H=+$('ch').value,c=new THREE.Vector3(L/2,H/3,W/2),d=Math.max(L,W,H)*1.6;controls.target.copy(c);
-   if(v==='top')camera.position.set(L/2,d,W/2+.001);else if(v==='side')camera.position.set(L/2,H/2,-d);else if(v==='rear')camera.position.set(-d,H/2,W/2);else camera.position.set(L+d*.55,H+d*.45,W+d*.55);controls.update()};
+ window.set3DView=(v)=>{let L=+$('cl').value,W=+$('cw').value,H=+$('ch').value,c=new THREE.Vector3(L/2-1.7,H/3,W/2),d=Math.max(L+5.8,W,H)*1.25;controls.target.copy(c);
+   if(v==='top')camera.position.set(L/2,d,W/2+.001);else if(v==='side')camera.position.set(L/2,H/2,-d);else if(v==='rear')camera.position.set(L+d,H/2,W/2);else camera.position.set(L*.36-d*.55,H+d*.36,W-d*.62);controls.update()};
  window.toggle3DLabels=()=>{showLabels=!showLabels;labels.style.display=showLabels?'block':'none'};
 
  function beginDrag(e){
@@ -546,7 +1232,16 @@ try{
    m.position.set(a.x+a.l/2,(a.z||0)+a.h/2,a.y+a.w/2);setWarning(m,a);stats();technicalCalc();
  }
  function endDrag(e){
-   if(!dragging)return;dragging=null;controls.enabled=true;canvas.style.cursor=moveMode==='z'?'ns-resize':'grab';
+   if(!dragging)return;
+   let a=dragging.item,prev=dragging.start;
+   if(a.x<0||a.y<0||a.x+a.l>+$('cl').value||a.y+a.w>+$('cw').value){a.v5Last=prev;a.x=null;a.y=null;a.z=0;}
+   else if(moveMode==='xy'&&$('v5StackPolicy')?.value!=='off'){
+     let z=supportHeight(a);if(z>0&&z+a.h<=+$('ch').value){a.z=z;}
+   }
+   if(a.x!=null&&(collision3D(a)||unsupported(a)||oog3D(a).any)){
+     Object.assign(a,prev);
+   }else if(a.x!=null){a.v5Last={x:a.x,y:a.y,z:a.z||0};}
+   dragging=null;controls.enabled=true;canvas.style.cursor=moveMode==='z'?'ns-resize':'grab';
    try{canvas.releasePointerCapture(e.pointerId)}catch{} refresh();
  }
  canvas.addEventListener('pointerdown',beginDrag,true);
@@ -570,13 +1265,312 @@ try{
  });
 
  function resize(){let r=wrap.getBoundingClientRect();renderer.setSize(r.width,r.height,false);camera.aspect=r.width/r.height;camera.updateProjectionMatrix()}
+ // V5.0: technical dimensions in 3D, projected onto the actual vehicle/cargo.
+ const dimOverlay=document.createElementNS('http://www.w3.org/2000/svg','svg');
+ dimOverlay.id='v5Dim3D';dimOverlay.setAttribute('aria-label','Cotas técnicas 3D dinámicas');
+ Object.assign(dimOverlay.style,{position:'absolute',inset:'0',width:'100%',height:'100%',pointerEvents:'none',zIndex:'4',overflow:'hidden'});
+ wrap.appendChild(dimOverlay);
+ const dimSelector=document.createElement('select');dimSelector.id='v5DimMode';dimSelector.setAttribute('aria-label','Visualización de cotas 3D');
+ dimSelector.innerHTML='<option value="off">Vista limpia (sin cotas)</option><option value="technical">📐 Vista técnica completa</option><option value="clearances">Cotas y espacios libres</option><option value="cargo">Solo medidas de carga</option>';
+ Object.assign(dimSelector.style,{position:'absolute',top:'66px',right:'12px',zIndex:'12',background:'#fff',border:'1px solid #9ca3af',borderRadius:'7px',padding:'9px',fontWeight:'700',maxWidth:'230px'});
+ wrap.appendChild(dimSelector);
+ function draw3DDimensions(){
+  const mode=dimSelector.value;if(mode==='off'){dimOverlay.innerHTML='';return;}
+  const width=wrap.clientWidth,height=wrap.clientHeight;
+  dimOverlay.setAttribute('viewBox',`0 0 ${width} ${height}`);
+  const L=+$('cl').value,W=+$('cw').value,deck=+$('deckHeight').value||0;
+  const placed=items.filter(a=>Number.isFinite(a.x)&&Number.isFinite(a.y));
+  const project=(x,y,z)=>{const v=new THREE.Vector3(x,y,z).project(camera);return {x:(v.x+1)*width/2,y:(1-v.y)*height/2,visible:v.z<1&&v.z>-1}};
+  const line=(p,q,label,color='#087e8b')=>{
+    if(!p.visible||!q.visible)return '';
+    const dx=q.x-p.x,dy=q.y-p.y,dist=Math.hypot(dx,dy);
+    if(dist<14)return '';
+    const midx=(p.x+q.x)/2,midy=(p.y+q.y)/2;
+    const lx=Math.max(35,Math.min(width-35,midx)),ly=Math.max(20,Math.min(height-20,midy-9));
+    const safe=String(label).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    const tw=Math.max(62,safe.length*7.2+12);
+    return `<g><path d="M${p.x.toFixed(1)} ${p.y.toFixed(1)} L${q.x.toFixed(1)} ${q.y.toFixed(1)}" stroke="${color}" stroke-width="2" fill="none"/><circle cx="${p.x}" cy="${p.y}" r="3" fill="${color}"/><circle cx="${q.x}" cy="${q.y}" r="3" fill="${color}"/><rect x="${lx-tw/2}" y="${ly-14}" width="${tw}" height="19" rx="5" fill="#fff" fill-opacity=".93" stroke="${color}" stroke-opacity=".55"/><text x="${lx}" y="${ly}" font-size="12" font-family="Arial,sans-serif" font-weight="700" fill="#12364a" text-anchor="middle">${safe}</text></g>`;
+  };
+  const m=n=>Number(n).toFixed(2)+' m';
+  let out='';
+  if(mode==='technical'||mode==='clearances'){
+    out+=line(project(0,.12,-.48),project(L,.12,-.48),'Largo útil '+m(L));
+    out+=line(project(L+.35,.12,0),project(L+.35,.12,W),'Ancho útil '+m(W));
+    if(placed.length){
+      const xmin=Math.min(...placed.map(a=>a.x)),xmax=Math.max(...placed.map(a=>a.x+a.l));
+      const zmin=Math.min(...placed.map(a=>a.y)),zmax=Math.max(...placed.map(a=>a.y+a.w));
+      out+=line(project(0,.08,-.22),project(xmin,.08,-.22),'Libre '+m(xmin),'#e78b1b');
+      out+=line(project(xmax,.08,-.22),project(L,.08,-.22),'Libre '+m(L-xmax),'#e78b1b');
+      out+=line(project(xmin,.16,W+.24),project(xmax,.16,W+.24),'Ocupado '+m(xmax-xmin));
+      if(mode==='technical'){
+        out+=line(project(L+.6,.08,0),project(L+.6,.08,zmin),'Libre '+m(zmin),'#e78b1b');
+        out+=line(project(L+.6,.08,zmax),project(L+.6,.08,W),'Libre '+m(W-zmax),'#e78b1b');
+      }
+    }
+  }
+  if(mode==='technical'||mode==='cargo'){
+    placed.filter(a=>a.id===selected).forEach((a,i)=>{
+      const offset=.10+i*.07;
+      out+=line(project(a.x,a.z+a.h+.06,a.y-offset),project(a.x+a.l,a.z+a.h+.06,a.y-offset),`#${a.id} Largo ${m(a.l)}`,'#244f96');
+      if(i<3){
+        out+=line(project(a.x+a.l+.06,a.z+a.h+.04,a.y),project(a.x+a.l+.06,a.z+a.h+.04,a.y+a.w),`Ancho ${m(a.w)}`,'#244f96');
+        out+=line(project(a.x+a.l+.12,a.z,a.y+a.w),project(a.x+a.l+.12,a.z+a.h,a.y+a.w),`Alto ${m(a.h)}`,'#244f96');
+      }
+    });
+  }
+  if(mode==='technical'&&placed.length){
+    const top=Math.max(...placed.map(a=>(a.z||0)+a.h));
+    const high=Math.max(top,deck+top);
+    const x=Math.max(...placed.map(a=>a.x+a.l))+.7;
+    out+=line(project(x,-deck,W+.45),project(x,top,W+.45),'Altura carga+piso '+m(high),'#b13c50');
+    const loadKg=placed.reduce((s,a)=>s+(Number(a.kg)||0),0);
+    out+=`<rect x="${Math.max(8,width-245)}" y="${height-72}" width="235" height="60" rx="8" fill="#ffffff" fill-opacity=".94" stroke="#a5b4c3"/><text x="${width-232}" y="${height-49}" font-size="13" font-weight="700" fill="#183247">Carga ubicada: ${loadKg.toLocaleString('es-PE')} kg</text><text x="${width-232}" y="${height-30}" font-size="11" fill="#526878">Cotas geométricas · sin validar ejes</text>`;
+  }
+  dimOverlay.innerHTML=out;
+ }
  function animate(){
-   resize();controls.update();
-   for(let x of meshes){let a=x.item,p=x.mesh.position.clone();p.y+=(a.h/2+.10);p.project(camera);x.label.style.left=((p.x*.5+.5)*wrap.clientWidth)+'px';x.label.style.top=((-p.y*.5+.5)*wrap.clientHeight)+'px';x.label.style.display=(showLabels&&p.z<1)?'block':'none'}
+   resize();controls.update();draw3DDimensions();
+   for(let x of meshes){let a=x.item,p=x.mesh.position.clone();p.y+=(a.h/2+.10);p.project(camera);x.label.style.left=((p.x*.5+.5)*wrap.clientWidth)+'px';x.label.style.top=((-p.y*.5+.5)*wrap.clientHeight)+'px';x.label.style.display=(showLabels&&a.id===selected&&p.z<1)?'block':'none'}
    renderer.render(scene,camera);requestAnimationFrame(animate)
  }
  rebuild();window.set3DView('iso');window.setMoveMode('xy');animate();
 }catch(e){document.getElementById('threeError').style.display='flex';console.error(e)}
 </script>
 
+
+<script>
+/* UI PRO: organiza los controles originales sin sustituir IDs, cálculos ni eventos */
+(function(){
+ function details(title,children,open=false){const d=document.createElement('details');d.className='pro-details';d.open=open;const sum=document.createElement('summary');sum.textContent=title;d.appendChild(sum);const body=document.createElement('div');body.className='pro-inner';children.forEach(el=>body.appendChild(el));d.appendChild(body);return d;}
+ function collectBetween(start,end){let a=[],node=start.nextSibling;while(node&&node!==end){let next=node.nextSibling;a.push(node);node=next}return a;}
+ const left=document.querySelector('.card.left');if(!left)return;
+ const heads=[...left.querySelectorAll(':scope > h2')];if(heads.length>=3){
+  const [equipment,goods,project]=heads;
+  const eq=collectBetween(equipment,goods),go=collectBetween(goods,project),pr=[];let n=project.nextSibling;while(n){let nx=n.nextSibling;pr.push(n);n=nx}
+  const intro=document.createElement('div');intro.className='pro-sidehelp';intro.textContent='Configura la carga, selecciona el equipo y consulta la distribución. Los parámetros avanzados permanecen disponibles.';
+  left.insertBefore(intro,equipment);
+  const eqBasic=eq.filter(el=>el.nodeType===1&&(['SELECT'].includes(el.tagName)&&el.id==='preset'||el.classList.contains('grid3')));
+  const eqOther=eq.filter(el=>!eqBasic.includes(el));
+  equipment.remove();goods.remove();project.remove();
+  left.appendChild(details('01 · Vehículo y dimensiones',[...eqBasic],true));
+  left.appendChild(details('⚙ Parámetros técnicos del vehículo',eqOther,false));
+  left.appendChild(details('02 · Mercancía y packing list',go,true));
+  left.appendChild(details('03 · Guardar, exportar y proyecto',pr,false));
+ }
+ const mainRight=document.querySelector('main > section:not(.left)');if(!mainRight)return;
+ const heading=document.createElement('div');heading.className='pro-topline';heading.innerHTML='<div><h1>Panel de planificación</h1><small>Cubicación, selección de flota y revisión técnica</small></div><span class="pro-pill">V5.0 · PROTOTIPO</span>';
+ mainRight.insertBefore(heading,mainRight.firstChild);
+ const nav=document.createElement('div');nav.className='pro-quicknav';
+ nav.innerHTML='<button type="button" data-jump="threeWrap">Vista 3D</button><button type="button" data-jump="fleetPanel">Seleccionar flota</button><button type="button" data-jump="pro-checks">Validaciones</button><button type="button" data-jump="pro-plan">Plan 2D</button>';
+ heading.after(nav);nav.querySelectorAll('[data-jump]').forEach(b=>b.onclick=()=>document.getElementById(b.dataset.jump)?.scrollIntoView({behavior:'smooth',block:'start'}));
+ const alerts=mainRight.querySelector('.oogpanel'),tech=mainRight.querySelector('.techgrid');
+ if(alerts&&tech){const parent=alerts.parentNode,anchor=tech.nextSibling;const d=details('Validaciones y alertas de ingeniería',[alerts,tech],false);d.id='pro-checks';parent.insertBefore(d,anchor)}
+ const fleet=document.getElementById('fleetPanel');if(fleet){const fields=fleet.querySelector('.fleet-fields');if(fields){const parent=fields.parentNode,anchor=fields.nextSibling;const d=details('Ajustes de análisis de flota',[fields],false);parent.insertBefore(d,anchor)}}
+ const cards=[...mainRight.querySelectorAll(':scope > .card')];const plan=cards.find(c=>c.querySelector('#top'));
+ if(plan){const parent=plan.parentNode,anchor=plan.nextSibling;const d=details('Plano de estiba 2D, vista lateral y herramientas', [plan],false);d.id='pro-plan';parent.insertBefore(d,anchor)}
+ const detailCard=cards.find(c=>c.querySelector('#rows'));
+ if(detailCard){const parent=detailCard.parentNode,anchor=detailCard.nextSibling;const d=details('Listado detallado de mercancía',[detailCard],false);parent.insertBefore(d,anchor)}
+ const view=document.getElementById('threeWrap');if(view){const card=view.closest('.card');if(card&&fleet){fleet.parentNode.insertBefore(card,fleet)}}
+})();
+</script>
+
+<script>
+/* V5.0 - Extensión no destructiva: historial, cotas y espacios libres */
+(function(){
+ const $v=id=>document.getElementById(id);
+ const history=[],future=[];let baseline=null,suspend=false;
+ const snapshot=()=>JSON.stringify({items,uid,selected});
+ const commit=(before)=>{if(suspend)return;const after=snapshot();if(before!==after){history.push(before);if(history.length>80)history.shift();future.length=0;updateButtons();}};
+ const restore=(str)=>{if(!str)return;suspend=true;try{const d=JSON.parse(str);items=d.items;uid=d.uid;selected=d.selected;refresh()}finally{suspend=false}updateButtons();};
+ function undoV5(){if(!history.length)return;future.push(snapshot());restore(history.pop())}
+ function redoV5(){if(!future.length)return;history.push(snapshot());restore(future.pop())}
+ function resetV5(){if(!baseline)return;if(!confirm('¿Restablecer la última distribución guardada? Se conservarán los bultos del packing list.'))return;const d=JSON.parse(baseline);if(d.items.length!==items.length||d.items.some((a,i)=>a.id!==items[i].id)){alert('El packing list cambió desde el último guardado. Guarda una nueva distribución para restablecerla.');return;}const before=snapshot();items.forEach((a,i)=>{a.x=d.items[i].x;a.y=d.items[i].y;a.z=d.items[i].z;a.l=d.items[i].l;a.w=d.items[i].w;});commit(before);refresh()}
+ function saveBaseline(){baseline=snapshot();$v('v5Saved').textContent='Distribución guardada';}
+ function updateButtons(){if($v('v5Undo'))$v('v5Undo').disabled=!history.length;if($v('v5Redo'))$v('v5Redo').disabled=!future.length}
+ window.v5CommitExternalChange=(before)=>commit(before);
+ window.v5SnapshotExternal=()=>snapshot();
+ const wrap=(name)=>{const orig=window[name];if(typeof orig!=='function')return;window[name]=function(...args){const before=snapshot();const result=orig.apply(this,args);commit(before);return result;};};
+ ['addCargo','deleteSelected','unplaceSelected','centerSelected','rotateSelected','autoPack','clearAll','loadCabinetDemo','loadFleetExample','loadProject','restoreFleetPacking','previewFleetUnit','rotateSelected3D','dropSelected3D'].forEach(wrap);
+ const three=$v('threeWrap');const outer=three.closest('.card');
+ const tools=document.createElement('div');tools.className='v5-toolrow';tools.innerHTML='<button id="v5Undo" type="button">↶ Deshacer · Ctrl+Z</button><button id="v5Redo" type="button">↷ Rehacer · Ctrl+Y</button><button id="v5Save" type="button">Guardar distribución</button><button id="v5Reset" type="button">Restablecer</button><span id="v5Saved" class="v5-mini" style="align-self:center">Sin punto de restauración</span>';
+ outer.insertBefore(tools,three);
+ $v('v5Undo').onclick=undoV5;$v('v5Redo').onclick=redoV5;$v('v5Save').onclick=saveBaseline;$v('v5Reset').onclick=resetV5;
+ document.addEventListener('keydown',e=>{if(!(e.ctrlKey||e.metaKey)||e.altKey)return;const tag=document.activeElement?.tagName;if(['INPUT','TEXTAREA','SELECT'].includes(tag))return;const key=e.key.toLowerCase();if(key==='z'){e.preventDefault();e.shiftKey?redoV5():undoV5()}else if(key==='y'){e.preventDefault();redoV5()}});
+ let dragBefore=null;const canvas=$v('threeCanvas');canvas.addEventListener('pointerdown',()=>{dragBefore=snapshot()},true);canvas.addEventListener('pointerup',()=>{if(dragBefore){const before=dragBefore;dragBefore=null;setTimeout(()=>commit(before),0)}},false);
+ const panel=document.createElement('div');panel.className='v5-panel';panel.innerHTML='<h3>📐 Plano de cubicación acotado y espacios libres</h3><div class="v5-mini">Vista superior de la zona útil. Las cotas corresponden a posiciones actuales, no a la posición recomendada por ejes.</div><svg id="v5Diagram" viewBox="0 0 1000 330" role="img" aria-label="Plano superior con dimensiones y espacios libres"></svg><div class="v5-metrics" id="v5Clearances"></div><div id="v5PalletInfo" class="v5-note"></div><div class="v5-mini">Las cotas muestran holguras geométricas. No validan amarre, estabilidad, capacidad estructural, PBV ni gálibos de ruta. Los datos del fabricante prevalecen.</div>';
+ outer.appendChild(panel);
+ const fmt=n=>Number.isFinite(n)?n.toFixed(2)+' m':'—';
+ const esc=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ function updateDiagram(){
+  const L=+$v('cl').value,W=+$v('cw').value,deck=+$v('deckHeight').value,route=+$v('roadLimit').value,support=+$v('supportHeightRoad').value,acc=+$v('accessoryHeight').value;
+  const svg=$v('v5Diagram'),metrics=$v('v5Clearances');if(!(L>0&&W>0)){svg.innerHTML='';return;}
+  const placed=items.filter(a=>Number.isFinite(a.x)&&Number.isFinite(a.y));
+  const xmin=placed.length?Math.min(...placed.map(a=>a.x)):0,xmax=placed.length?Math.max(...placed.map(a=>a.x+a.l)):0;
+  const ymin=placed.length?Math.min(...placed.map(a=>a.y)):0,ymax=placed.length?Math.max(...placed.map(a=>a.y+a.w)):0;
+  const lf=placed.length?xmin:null,lr=placed.length?L-xmax:null,sideL=placed.length?ymin:null,sideR=placed.length?W-ymax:null;
+  const h=placed.length?Math.max(...placed.map(a=>deck+support+(a.z||0)+a.h+acc)):null;
+  const x0=110,y0=90,sw=790,sh=155,sx=sw/L,sy=sh/W;
+  const dim=(x1,y1,x2,y2,label)=>`<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="#167b85" stroke-width="1.7" marker-start="url(#v5arrow)" marker-end="url(#v5arrow)"/><text x="${(x1+x2)/2}" y="${(y1+y2)/2-7}" text-anchor="middle" font-size="15" font-weight="600" fill="#18546a">${esc(label)}</text>`;
+  let out='<defs><marker id="v5arrow" markerWidth="7" markerHeight="7" refX="3" refY="3" orient="auto-start-reverse"><path d="M0 0 L6 3 L0 6" fill="none" stroke="#167b85" stroke-width="1.2"/></marker></defs>';
+  out+=`<rect x="${x0}" y="${y0}" width="${sw}" height="${sh}" fill="#e7edf1" stroke="#526878" stroke-width="2" rx="3"/>`;
+  placed.forEach(a=>{let x=x0+a.x*sx,y=y0+a.y*sy,w=a.l*sx,z=a.w*sy;out+=`<rect x="${x}" y="${y}" width="${w}" height="${z}" fill="${/^#[0-9a-fA-F]{6}$/.test(a.color)?a.color:'#7897a5'}" fill-opacity=".75" stroke="#283b49" stroke-width="1.6"/><text x="${x+w/2}" y="${y+z/2+4}" font-size="13" text-anchor="middle" fill="#101f29" font-weight="700">#${a.id} · ${a.l.toFixed(2)} × ${a.w.toFixed(2)} m</text>`;});
+  out+=dim(x0,52,x0+sw,52,`Largo útil ${fmt(L)}`);
+  if(placed.length){if(lf>=0)out+=dim(x0,276,x0+lf*sx,276,`Libre ${fmt(lf)}`);out+=dim(x0+xmin*sx,307,x0+xmax*sx,307,`Ocupado ${fmt(xmax-xmin)}`);if(lr>=0)out+=dim(x0+xmax*sx,276,x0+sw,276,`Libre ${fmt(lr)}`);}
+  out+=`<text x="${x0+sw/2}" y="78" text-anchor="middle" font-size="13" fill="#526878">Vista superior · ancho útil ${fmt(W)}</text>`;
+  svg.innerHTML=out;
+  const cell=(title,value)=>`<div><small>${title}</small><b>${value}</b></div>`;
+  metrics.innerHTML=cell('Libre delante',lf===null?'Sin ubicar':fmt(lf))+cell('Libre detrás',lr===null?'Sin ubicar':fmt(lr))+cell('Libre lateral izq.',sideL===null?'Sin ubicar':fmt(sideL))+cell('Libre lateral der.',sideR===null?'Sin ubicar':fmt(sideR))+cell('Altura total estimada',h===null?'—':fmt(h))+cell('Margen vs. referencia',h===null?'—':fmt(route-h))+cell('Carga ubicada',placed.length+' / '+items.length)+cell('Zona útil',fmt(L)+' × '+fmt(W));
+  const modes=items.map(a=>a.palletMode||'unknown');let message=modes.length&&modes.every(m=>m==='none')?'Sin pallets declarados. Confirmar apoyos y trincaje.':modes.length&&modes.every(m=>m==='included')?'Base/pallet incluido en dimensiones y peso declarados.':modes.some(m=>m==='extra')?'Hay bultos con altura y peso de base añadidos. Validar capacidad y huella de la base.':'Paletizado o condición de apoyo sin confirmar para uno o más bultos.';
+  $v('v5PalletInfo').textContent='Condición de estiba: '+message;
+ }
+ const oldRefresh=window.refresh;window.refresh=function(...args){const r=oldRefresh.apply(this,args);updateDiagram();return r;};
+ ['cl','cw','deckHeight','roadLimit','supportHeightRoad','accessoryHeight'].forEach(id=>$v(id)?.addEventListener('input',updateDiagram));
+ updateDiagram();updateButtons();
+})();
+</script>
+
+<script>
+/* V5.0: flujo de trabajo sin datos demo persistentes */
+(function(){
+ const $id=id=>document.getElementById(id);
+ const pending='<div class="fleet-warn"><b>Requiere recalcular.</b> El packing list o las condiciones cambiaron. Pulsa «Calcular flota y justificar recomendación» para obtener una propuesta actualizada.</div>';
+ let calculatedSignature=null;
+ let restoring=false;
+ const signature=()=>JSON.stringify({items:items.map(a=>[a.id,a.name,a.l,a.w,a.h,a.kg,a.rotate,a.stack,a.palletMode]),settings:['fleetNature','fleetCG','fleetManufacturer','fleetGap','fleetSupport','fleetRoad','fleetFlatKg','fleetLowKg','fleetCradleKg','priceFlat','priceLow','priceCradle','priceModular'].map(id=>$id(id)?.value)});
+ const rawCalc=window.calculateFleet;
+ window.calculateFleet=function(...args){
+   if(fleetBackup){window.restoreFleetPacking();}
+   const result=rawCalc.apply(this,args);
+   calculatedSignature=signature();
+   return result;
+ };
+ const rawRefresh=window.refresh;
+ window.refresh=function(...args){
+   const result=rawRefresh.apply(this,args);
+   if(!restoring&&calculatedSignature!==null&&signature()!==calculatedSignature){
+     calculatedSignature=null;
+     fleetLast=[];
+     $id('fleetResults').innerHTML=pending;
+   }
+   return result;
+ };
+ function ensureFullPacking(){
+   if(fleetBackup){restoring=true;try{window.restoreFleetPacking()}finally{restoring=false}}
+ }
+ const rawAdd=window.addCargo;
+ window.addCargo=function(...args){ensureFullPacking();const before=items.length;const out=rawAdd.apply(this,args);if(items.length>before){window.autoPack();window.calculateFleet()}return out};
+ const rawImport=window.confirmImport;
+ window.confirmImport=function(...args){ensureFullPacking();const before=items.length;const out=rawImport.apply(this,args);if(items.length>before){window.autoPack();window.calculateFleet()}return out};
+ const rawDelete=window.deleteSelected;
+ window.deleteSelected=function(...args){ensureFullPacking();const out=rawDelete.apply(this,args);window.calculateFleet();return out};
+ const rawClear=window.clearAll;
+ window.clearAll=function(...args){ensureFullPacking();const out=rawClear.apply(this,args);if(!items.length){fleetLast=[];calculatedSignature=null;$id('fleetResults').innerHTML='<p class="fleet-muted">Sin mercancía. Agrega bultos o importa tu packing list.</p>'}return out};
+ window.newV5Simulation=function(){
+   if(!confirm('¿Iniciar una nueva simulación? Se eliminarán los bultos actuales y los resultados calculados. Guarda el proyecto si deseas conservarlo.'))return;
+   ensureFullPacking();items=[];uid=1;selected=null;fleetLast=[];fleetBackup=null;calculatedSignature=null;
+   ['name','sku','l','w','h','kg'].forEach(id=>{const el=$id(id);if(el)el.value=''});$id('qty').value='1';$id('v5PalletMode').value='unknown';
+   $id('fleetRestore').style.display='none';
+   $id('fleetResults').innerHTML='<p class="fleet-muted">Nueva simulación lista. Agrega mercancía o importa tu packing list.</p>';
+   window.refresh();
+ };
+ ['fleetNature','fleetCG','fleetManufacturer','fleetGap','fleetSupport','fleetRoad','fleetFlatKg','fleetLowKg','fleetCradleKg','priceFlat','priceLow','priceCradle','priceModular'].forEach(id=>{
+   $id(id)?.addEventListener('change',()=>{if(calculatedSignature!==null&&signature()!==calculatedSignature){calculatedSignature=null;fleetLast=[];$id('fleetResults').innerHTML=pending}});
+ });
+ // A single-unit preview is temporary. Restore the full list before editing cargo.
+ const restore=$id('fleetRestore');if(restore){restore.textContent='Volver al packing list completo';}
+ // The app opens empty; no sample freight is loaded automatically.
+})();
+</script>
+<script>
+/* V5.0 PRO: edición por código y recubicación sincronizada */
+(function(){
+ const e=id=>document.getElementById(id);
+ const ids=['v5EditL','v5EditW','v5EditH','v5EditKg','v5EditGap','v5EditPriority','v5EditStack','v5EditTop','v5EditColor'];
+ const codeOf=a=>a.sku?.trim()||'SIN CÓDIGO';
+ let loadedKey='',editing=false,dirty=false;
+ const codeSelect=e('v5EditCode');
+ const encode=x=>String(x).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+ function load(key){
+   const a=items.find(x=>codeOf(x)===key);loadedKey=key||'';dirty=false;
+   if(!a){e('v5EditDirty').textContent='Registra una mercancía para comenzar.';return;}
+   e('v5EditL').value=+(a.l/(+e('v5EditUnitL').value)).toPrecision(10);e('v5EditW').value=+(a.w/(+e('v5EditUnitW').value)).toPrecision(10);e('v5EditH').value=+(a.h/(+e('v5EditUnitH').value)).toPrecision(10);e('v5EditKg').value=+(a.kg/(+e('v5EditWeightUnit').value)).toPrecision(10);
+   e('v5EditGap').value=String(a.clearance??(+e('clearance').value||0));
+   e('v5EditPriority').value=a.priority||'B';e('v5EditStack').value=a.stack?'1':'0';e('v5EditTop').value=a.maxTopLoad||0;
+   e('v5EditColor').value=/^#[0-9a-f]{6}$/i.test(a.color)?a.color:'#e85b59';
+   e('v5EditDirty').textContent='Código '+key+' listo para editar. Separación actual: '+Math.round((a.clearance??(+e('clearance').value||0))*100)+' cm.';
+ }
+ function updateOptions(){
+   if(editing)return;
+   const codes=[...new Set(items.map(codeOf))];const current=codeSelect.value;
+   const signature=codes.join('\u0001');
+   if(codeSelect.dataset.signature!==signature){codeSelect.innerHTML=codes.map(c=>'<option value="'+encode(c)+'">'+encode(c)+'</option>').join('');codeSelect.dataset.signature=signature;}
+   const wanted=codes.includes(current)?current:codes.includes(loadedKey)?loadedKey:codes[0]||'';
+   if(codeSelect.value!==wanted)codeSelect.value=wanted;
+   if(!dirty && (loadedKey!==wanted || !loadedKey))load(wanted);
+ }
+ codeSelect.addEventListener('change',()=>load(codeSelect.value));
+ ids.forEach(id=>e(id).addEventListener('input',()=>{dirty=true;e('v5EditDirty').textContent='Cambios pendientes: pulsa «Aplicar cambios y recubicar». La distribución actual todavía no incorpora estos valores.';}));
+ e('v5ApplyEdit').addEventListener('click',()=>{
+   const key=codeSelect.value,group=items.filter(a=>codeOf(a)===key);
+   if(!group.length)return alert('Selecciona un código con mercancías registradas.');
+   const L=+e('v5EditL').value*(+e('v5EditUnitL').value),W=+e('v5EditW').value*(+e('v5EditUnitW').value),H=+e('v5EditH').value*(+e('v5EditUnitH').value),kg=+e('v5EditKg').value*(+e('v5EditWeightUnit').value),top=+e('v5EditTop').value,gap=+e('v5EditGap').value;
+   if(![L,W,H,kg].every(n=>Number.isFinite(n)&&n>0)||![top,gap].every(n=>Number.isFinite(n)&&n>=0))return alert('Verifica dimensiones y peso mayores que cero, y soporte y separación no negativos.');
+   const before=window.v5SnapshotExternal?.();
+   editing=true;
+   try{
+     group.forEach(a=>{a.l=L;a.w=W;a.h=H;a.kg=kg;a.clearance=gap;a.priority=e('v5EditPriority').value;a.stack=e('v5EditStack').value==='1';a.maxTopLoad=top;a.color=e('v5EditColor').value;a.x=null;a.y=null;a.z=0;});
+     // Apply requested separation as global floor for this recalculation.
+     e('clearance').value=String(gap);
+     if(typeof v5CodeColors!=='undefined')v5CodeColors.set(key,e('v5EditColor').value);
+     // Re-pack all cargo, not just the edited code; preserves code, quantities and unique IDs.
+     autoPack();
+     window.v5CommitExternalChange?.(before);
+     loadedKey=key;dirty=false;
+     const placed=group.filter(a=>a.x!=null&&!invalid(a)).length;
+     e('v5EditDirty').textContent='✓ Actualizado código '+key+': '+placed+'/'+group.length+' ubicados, '+(group.length-placed)+' pendientes. Separación '+Math.round(gap*100)+' cm. Revisa peso total y restricciones.';
+   }finally{editing=false;}
+ });
+ const originalRefresh=window.refresh;
+ window.refresh=function(...args){const result=originalRefresh.apply(this,args);updateOptions();return result;};
+ updateOptions();
+})();
+</script>
+<script>
+/* V5.0 PRO: compact independent units. Values convert in place, normalized m/kg in cargo engine. */
+(function(){
+ const el=id=>document.getElementById(id);
+ function setup(selectId,fieldId){
+  const sel=el(selectId),input=el(fieldId);if(!sel||!input)return;
+  let previous=Number(sel.value);
+  sel.addEventListener('change',()=>{
+   const next=Number(sel.value);
+   if(input.value.trim()!==''&&Number.isFinite(Number(input.value))){input.value=String(+(Number(input.value)*previous/next).toPrecision(12));}
+   previous=next;
+   input.dispatchEvent(new Event('input',{bubbles:true}));
+  });
+ }
+ [['v5CargoUnitL','l'],['v5CargoUnitW','w'],['v5CargoUnitH','h'],['v5CargoWeightUnit','kg'],['v5EditUnitL','v5EditL'],['v5EditUnitW','v5EditW'],['v5EditUnitH','v5EditH'],['v5EditWeightUnit','v5EditKg']].forEach(x=>setup(...x));
+
+})();
+</script>
+
+<script>
+/* Vista previa de colores predefinidos. 'Automático' rota colores entre códigos. */
+(function(){
+ const colors=['#e85b59','#2e86de','#e5a52c','#16a085','#9b59b6','#d35400','#27ae60','#34495e','#c0398b','#6482d4','#7f8c8d','#8e6548'];
+ function paint(id,swatch){
+   const select=document.getElementById(id),preview=document.getElementById(swatch);
+   if(!select||!preview)return;
+   const v=select.value;
+   preview.style.background=v==='auto'?colors[0]:v;
+   preview.title=v==='auto'?'Color automático distinto por código':select.options[select.selectedIndex]?.text||'Color';
+ }
+ for(const [id,swatch] of [['color','v5ColorSwatch'],['v5EditColor','v5EditColorSwatch']]){
+   const el=document.getElementById(id);if(!el)continue;
+   el.addEventListener('change',()=>paint(id,swatch));
+   new MutationObserver(()=>paint(id,swatch)).observe(el,{attributes:true,attributeFilter:['value']});
+   paint(id,swatch);
+ }
+})();
+</script>
 </body></html>
